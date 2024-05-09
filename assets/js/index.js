@@ -1,7 +1,23 @@
 const chekMenu = document.getElementById("menu-check"),
+    contacts_table = document.getElementById("contacts-table"),
     menuBarsIcon = document.querySelector(".menu-bars-container i"),
     leftNavigation = document.querySelector(".left-navigation"),
     mainFrame = document.querySelector(".main-frame");
+console.log(contacts_table.querySelectorAll("tbody tr td input"))
+var contactsCheckboxes = contacts_table.querySelectorAll("tbody tr td input");
+
+//gestion du style des contacts selectionés
+contacts_table.querySelectorAll("tbody tr td input").array.forEach(checkbox => {
+    checkbox.addEventListener("change", ()=>{
+        
+        if(this.checked){
+            this.parentElement.classList.add("selected-row");
+        }
+        else{
+            this.parentElement.classList.remove("selected-row");
+        }
+    })
+});
 
 //Gestion de menu bar avec le checkbox invisible
 chekMenu.addEventListener('change', (event)=>{

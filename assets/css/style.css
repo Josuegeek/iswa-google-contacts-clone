@@ -373,6 +373,18 @@ th, td{
     transition: all ease-in-out 0.15s;
 }
 
+#contacts-table tbody tr:hover .contact-profile{
+    opacity: 0;
+}
+
+#contacts-table tbody tr{
+    position: relative;
+}
+
+.selected-row{
+    background-color: var(--primary-transparent-color);
+}
+
 .contact-profile{
     display: flex;
     justify-content: center;
@@ -387,8 +399,55 @@ th, td{
     color: var(--white1);
 }
 
+#contacts-table tbody tr:hover .contact-controls{
+    opacity: 1;
+    z-index: 10;
+    
+}
+
+.contact-controls{
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0px 10px;
+    transition: all ease-in-out 0.3s;
+}
+
+.contact-controls input[type="checkbox"]{
+    width: 30px;
+    height: 30px;
+}
+
+.contact-controls input[type="checkbox"]:checked tr{
+    background-color: var(--primary-transparent-color);
+}
+
+.right-contacts-controls{
+    margin-right: 10px;
+    background-color: var(--hover-color);
+}
+
+.icon-btn{
+    text-align: center;
+    align-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 3px;
+    border-radius: 50%;
+}
+
 .lbl-model{
     padding: 3px;
     border: solid 1px var(--gray-t);
     border-radius: 10px;
+}
+
+.libelles-list{
+    padding: 0px 15px 0% 15px;
+}
+
+.libelle-view{
+    padding: 10px;
+    border-radius: 20px;
 }
