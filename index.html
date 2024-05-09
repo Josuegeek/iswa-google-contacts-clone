@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iswa Google Contacts</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/font-awesome/fontawesome.css">
+    <link rel="stylesheet" href="./assets/iswa.dropdown/iswa.dropdown.css">
     <link rel="icon" href="./imgs/contats-icon.png">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
+
 <body>
     <div class="main-container">
         <div class="topbar">
@@ -25,25 +28,100 @@
                     <input type="text" id="search-contacts-input" placeholder="Rechercher">
                 </div>
             </div>
-            <div class="right-block">
+            <div class="right-block just-cont-end">
                 <div class="user-profil-container clickable-background">
                     <i class="fa-solid fa-user"></i>
                 </div>
-                
+
             </div>
         </div>
-        <div class="main-div">
+        <div class="main-side">
             <div class="left-navigation">
+                <div class="add-contact-btn-container">
+                    <div class="dropdown">
+                        <button class="btn secondary-btn row-block al-it-center default-gap">
+                            <i class="fa-solid fa-plus add-icon"></i>
+                            <span>Créer un contact</span>
+                        </button>
+                        <div class="dropdown-content">
+                            <div id="create-contact-btn"
+                                class="row-block default-gap clickable-background default-margin">
+                                <i class="fa-regular fa-user"></i>
+                                <span>Créer un contact</span>
+                            </div>
+                            <div id="create-contacts-btn"
+                                class="row-block default-gap clickable-background default-margin">
+                                <i class="fa-solid fa-users"></i>
+                                <span>Créer plusieurs contacts</span>
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
+                <div class="column default-mg-top">
+                    <button id="all-contacts-btn"
+                        class="menu-btn row-block al-it-center just-cont-space-between selected-secondary-btn">
+                        <div class="row gap-big">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Contacts</span>
+                        </div>
+                        <small id="contacts-number-lbl">100</small>
+                    </button>
+                    <button id="recents-contacts-btn" class="menu-btn row-block al-it-center clickable-background">
+                        <div class="row gap-big">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            <span>Frequents</span>
+                        </div>
+                    </button>
+                    <div class="libelle-title row-block just-cont-space-between al-it-center">
+                        <span>Libellés</span>
+                        <i id="add-label-btn" class="fa-solid fa-plus add-icon clickable-background"></i>
+                    </div>
+                </div>
             </div>
-            <div class="main-side">
-
+            <div class="main-frame">
+                <div class="contacts-container column-block default-gap">
+                    <div class="contacts-title-container row-block default-gap al-it-center">
+                        <h1 class="frame-title">Contacts</h1> <small>(100)</small>
+                    </div>
+                    <table id="contacts-table">
+                        <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>E-mail</th>
+                                <th>Numéro de téléphone</th>
+                                <th>Fonction et entreprise</th>
+                                <th>Libellés</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="row-block default-gap al-it-center">
+                                        <span class="contact-profile">A</span>
+                                        <span>Iswa Senteri Josué</span>
+                                    </div>
+                                </td>
+                                <td>iswajosuepro@gmail.com</td>
+                                <td>+243 813662364</td>
+                                <td>Developpeur Kadea</td>
+                                <td>
+                                    <div class="row-block flex-wrap--wrap default-gap">
+                                        <div class="lbl-model">Bureau</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        
+
     </div>
 
 
     <script src="./assets/js/index.js"></script>
+    <script src="./assets/iswa.dropdown/iswa.dropdown.js"></script>
 </body>
+
 </html>
