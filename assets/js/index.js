@@ -3,7 +3,21 @@ const chekMenu = document.getElementById("menu-check"),
     menuBarsIcon = document.querySelector(".menu-bars-container i"),
     leftNavigation = document.querySelector(".left-navigation"),
     mainFrame = document.querySelector(".main-frame"),
-    floatBtn = document.getElementById("float-btn");
+    floatBtn = document.getElementById("float-btn"),
+    prenomInput = document.getElementById("prenom"),
+    suffixeInput = document.getElementById("suffixe"),
+    prefixeInput = document.getElementById("prefixe"),
+    nomInput = document.getElementById("nom"),
+    deuxiemePrenomInput = document.getElementById("deuxieme-prenom"),
+    prenomPhonetiqueInput = document.getElementById("prenom-phonetique"),
+    deuxiemePrenomPhonetiqueInput = document.getElementById("deuxieme-prenom-ponetique"),
+    dnomPhonetiqueInput = document.getElementById("nom-phonetique"),
+    pseudoInput = document.getElementById("pseudo"),
+    enTantQueInput = document.getElementById("en-tant-que"),
+    entrepriseInput = document.getElementById("entreprise"),
+    fonctionInput = document.getElementById("fonction"),
+    emailInput = document.getElementById("email"),
+    phoneInput = document.getElementById("phone");
 
 //Gestion de menu bar avec le checkbox invisible
 chekMenu.addEventListener('change', (event) => {
@@ -35,6 +49,9 @@ document.addEventListener("click", (event) => {
         }
     });
 });
+
+//initialisation de l'input pour le téléphone
+window.intlTelInput(phoneInput, {})
 
 //fonction pour ajouter du style dynamique aux rows dans la liste des contacts
 function initContactsCheckboxesStyle(){

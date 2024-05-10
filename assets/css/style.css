@@ -12,6 +12,7 @@
     --red: #e9370a;
     --red-t: #e9370a65;
     --gray-t : #e3e7e7;
+    --gray-2 : #e8effa;
     --secondary-color : #f1f3f4;
 }
 
@@ -24,6 +25,10 @@ body{
     color: var(--black1);
     height: 100vh;
     transition: all ease-in-out 0.3s;
+}
+
+button{
+    color: var(--black1);
 }
 
 i{
@@ -358,13 +363,18 @@ input:focus{
     box-shadow: rgba(60, 64, 67, 0.3) 0px 2px 4px 0px, rgba(60, 64, 67, 0.15) 0px 2px 5px 1px;
 }
 
-.secondary-btn{
+.btn-secondary{
     font-size: 1.05rem;
     height: 56px;
     border-radius: 15px;
     padding: 30px 23px;
     background-color: var(--primary-transparent-color);
     color: var(--black1);
+}
+
+.btn-action{
+    color: var(--primary-color);
+    background-color: var(--gray-2);
 }
 
 .float-btn{
@@ -379,13 +389,13 @@ input:focus{
     background-color: var(--primary-transparent-color2);
 }
 
-.selected-secondary-btn{
+.selected-btn-secondary{
     background-color: var(--primary-transparent-color);
     transition: all ease-in-out 0.2s;
     font-weight: 700;
 }
 
-.selected-secondary-btn:hover{
+.selected-btn-secondary:hover{
     background-color: var(--primary-transparent-color2);
 }
 
@@ -494,10 +504,32 @@ th, td{
     right: 0px;
 }
 
-.inputs{
+.inputs-container{
     overflow-y: scroll;
     height: 100%;
-    padding: 10px 0px;
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.inputs-section{
+    gap: 15px;
+}
+
+.ic{
+    margin-top: 18px;
+}
+
+.inputs-section-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.inputs .input-container{
+    margin: 10px 0px;
+}
+
+.inputs{
     width: 100%;
 }
 
