@@ -151,7 +151,7 @@ small{
 
 .topbar{
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 3.2fr 0.8fr;
     padding: 5px 10px 0px 10px;
     height: 65px;
 }
@@ -179,7 +179,7 @@ small{
 }
 
 .main-frame{
-    padding: 30px 20px 0px 20px;
+    padding: 30px 20px 0px 45px;
     border-radius: 20px;
     background-color: white;
     margin: 0 20px 30px 20px;
@@ -197,6 +197,12 @@ small{
     gap: 10px;
     padding: 5px;
     align-items: center;
+}
+
+.horizontal-separator{
+    width: 100%;
+    height: 1px;
+    background-color: #a09f9f;
 }
 
 .menu-bars-container{
@@ -294,6 +300,13 @@ input:focus{
     transition: all ease-in-out 0.2s;
 }
 
+.btn-primary{
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    font-size: 15px;
+}
+
 .menu-btn{
     cursor: pointer;
     padding: 15px;
@@ -304,11 +317,40 @@ input:focus{
     font-size: 16px;
 }
 
+.small-btn{
+    font-size: 10px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: white;
+    border: solid 2px var(--gray-t);
+}
+
+.small-btn i{
+    font-size: 15px;
+}
+
 .btn:hover{
     box-shadow: rgba(60, 64, 67, 0.3) 0px 2px 4px 0px, rgba(60, 64, 67, 0.15) 0px 2px 5px 1px;
 }
 
-#dropdown-check{
+.btn:disabled{
+    color: var(--black2);
+    background-color: #fafafa;
+    cursor: default;
+}
+
+.btn:disabled:hover{
+    color: var(--black2);
+    background-color: #fafafa;
+    box-shadow: none;
+}
+
+.btn-primary:disabled{
+    background-color: #fafafa;
+    color: var(--black2);
+}
+
+.add-contact-btn-container #dropdown-check{
     width: 201px;
 }
 
@@ -323,6 +365,18 @@ input:focus{
     padding: 30px 23px;
     background-color: var(--primary-transparent-color);
     color: var(--black1);
+}
+
+.float-btn{
+    position: absolute;
+    bottom: 35px;
+    right: 25px;
+    padding: 15px 18px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 2px 4px 0px, rgba(60, 64, 67, 0.15) 0px 2px 5px 1px;
+}
+
+.float-btn:hover{
+    background-color: var(--primary-transparent-color2);
 }
 
 .selected-secondary-btn{
@@ -385,6 +439,14 @@ th, td{
     background-color: var(--primary-transparent-color);
 }
 
+.hide{
+    opacity: 0;
+}
+
+.show{
+    opacity: 1;
+}
+
 .contact-profile{
     display: flex;
     justify-content: center;
@@ -399,6 +461,70 @@ th, td{
     color: var(--white1);
 }
 
+.contact-form-container{
+    max-width: 680px;
+    height: 100%;
+}
+
+.top-controls{
+    background-color: white;
+}
+
+.profile-container{
+    position: relative;
+    width: fit-content;
+}
+
+.profile-container img{
+    width: 162px;
+    height: 162px;
+    border-radius: 50%;
+}
+
+.choose-img-btn{
+    position: absolute;
+    cursor: pointer;
+    bottom: 5px;
+    font-size: 16px;
+    padding: 13px ;
+    color: white;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    border: 3px solid white;
+    right: 0px;
+}
+
+.inputs{
+    overflow-y: scroll;
+    height: 100%;
+    padding: 10px 0px;
+    width: 100%;
+}
+
+.libelle-select{
+    width: fit-content;
+    margin: 20px 0px 40px 10px;
+}
+
+.libelles-inputs-container{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    align-items: center;
+    padding: 15px 0px;
+    gap: 10px;
+}
+
+.libelles-inputs-container #add-label-btn{
+    width: 100%;
+}
+
+.libelles-inputs-container #add-label-btn i{
+    font-size: 15px;
+    margin: 10px;
+    margin-left: 30px;
+}
+
 #contacts-table tbody tr:hover .contact-controls{
     opacity: 1;
     z-index: 10;
@@ -407,16 +533,19 @@ th, td{
 
 .contact-controls{
     position: absolute;
-    opacity: 0;
     width: 100%;
     height: 100%;
-    padding: 0px 10px;
+    padding: 0px 10px 0px 17px;
     transition: all ease-in-out 0.3s;
 }
 
+.contact-controls:hover .right-contacts-controls{
+    opacity: 1;
+}
+
 .contact-controls input[type="checkbox"]{
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
 }
 
 .contact-controls input[type="checkbox"]:checked tr{
@@ -424,13 +553,17 @@ th, td{
 }
 
 .right-contacts-controls{
-    margin-right: 10px;
+    opacity: 0;
+    margin-right: 17px;
     background-color: var(--hover-color);
+    transition: all ease-in-out 0.2s;
 }
 
 .icon-btn{
+    display: flex;
     text-align: center;
-    align-content: center;
+    justify-content: center;
+    align-items: center;
     width: 30px;
     height: 30px;
     padding: 3px;
@@ -439,7 +572,7 @@ th, td{
 
 .lbl-model{
     padding: 3px;
-    border: solid 1px var(--gray-t);
+    background-color: var(--primary-transparent-color2);
     border-radius: 10px;
 }
 

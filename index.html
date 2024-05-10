@@ -13,6 +13,9 @@
 
 <body>
     <div class="main-container">
+        <button id="float-btn" class="btn float-btn secondary-btn row-block al-it-center default-gap hide">
+            <i class="fa-solid fa-plus add-icon"></i>
+        </button>
         <div class="topbar">
             <div class="left-block">
                 <div class="menu-bars-container clickable-background">
@@ -48,11 +51,6 @@
                                 class="row-block default-gap clickable-background default-margin">
                                 <i class="fa-regular fa-user"></i>
                                 <span>Créer un contact</span>
-                            </div>
-                            <div id="create-contacts-btn"
-                                class="row-block default-gap clickable-background default-margin">
-                                <i class="fa-solid fa-users"></i>
-                                <span>Créer plusieurs contacts</span>
                             </div>
                         </div>
                     </div>
@@ -111,47 +109,64 @@
                 </div>
             </div>
             <div class="main-frame">
-                <div class="contacts-container column-block default-gap">
-                    <div class="contacts-title-container row-block default-gap al-it-center">
-                        <h1 class="frame-title">Contacts</h1> <small>(100)</small>
+                <form class="contact-form-container column-block default-gap" action="">
+                    <div class="top-controls row-block just-cont-space-between al-it-center">
+                        <i class="fa-solid fa-arrow-left icon-btn clickable-background"></i>
+                        <div class="row-block default-gap al-it-center">
+                            <i class="fa-regular fa-star icon-btn clickable-background"></i>
+                            <button id="submit-btn" class="btn btn-primary" disabled>Enregistrer</button>
+                        </div>
                     </div>
-                    <table id="contacts-table">
-                        <thead>
-                            <tr>
-                                <th>Titre</th>
-                                <th>E-mail</th>
-                                <th>Numéro de téléphone</th>
-                                <th>Fonction et entreprise</th>
-                                <th>Libellés</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="contact-controls row-block just-cont-space-between al-it-center">
-                                        <input type="checkbox" name="contact-check" id="contact-check">
-                                        <div class="right-contacts-controls row-block default-gap al-it-center">
-                                            <i class="fa-regular fa-pen-to-square icon-btn clickable-background"></i>
-                                            <i class="fa-solid fa-ellipsis-vertical icon-btn clickable-background"></i>
+                    <div class="inputs">
+                        <div class="profile-container">
+                            <img src="./imgs/user_sample.png" alt="profil du contact">
+                            <i class="fa-solid fa-plus add-icon choose-img-btn"></i>
+                        </div>
+                        <div class="dropdown libelle-select">
+                            <button class="btn dropdown-btn small-btn row-block al-it-center default-gap">
+                                <i class="fa-solid fa-plus add-icon"></i>
+                                <span>Libellé</span>
+                            </button>
+                            <div class="dropdown-content">
+                                <div class="libelles-inputs-container">
+                                    <span>Gérer les libellés</span>
+                                    <div class="horizontal-separator"></div>
+                                    <div id="add-label-btn">
+                                        <div class="row-block default-gap al-it-center clickable-background">
+                                            <i class="fa-solid fa-plus add-icon"></i>
+                                            <span>Créer un libellé</span>
                                         </div>
                                     </div>
-                                    <div class="row-block default-gap al-it-center">
-                                        <span class="contact-profile">A</span>
-                                        <span>Iswa Senteri Josué</span>
-                                    </div>
-                                </td>
-                                <td>iswajosuepro@gmail.com</td>
-                                <td>+243 813662364</td>
-                                <td>Developpeur Kadea</td>
-                                <td>
-                                    <div class="row-block flex-wrap--wrap default-gap">
-                                        <div class="lbl-model">Bureau</div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-container">
+                            <i class="input-icon"></i>
+                            <label for="prenom">Prénom</label>
+                            <input type="text" id="prenom">
+                        </div>
+                        <div class="input-container">
+                            <i class="input-icon"></i>
+                            <label for="nom">Nom</label>
+                            <input type="text" id="nom">
+                        </div>
+                        <div class="input-container">
+                            <i class="input-icon"></i>
+                            <label for="entreprise">Entreprise</label>
+                            <input type="text" id="entreprise">
+                        </div>
+                        <div class="input-container">
+                            <i class="input-icon"></i>
+                            <label for="fonction">Fonction</label>
+                            <input type="text" id="fonction">
+                        </div>
+                        <div class="input-container">
+                            <i class="input-icon"></i>
+                            <label for="email">E-mail</label>
+                            <input type="text" id="email">
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
 
