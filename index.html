@@ -119,117 +119,136 @@
                             <button id="submit-btn" class="btn btn-primary" disabled>Enregistrer</button>
                         </div>
                     </div>
-                    <div class="inputs-container">
-                        <div class="profile-container">
-                            <img src="./imgs/user_sample.png" alt="profil du contact">
-                            <i class="fa-solid fa-plus add-icon choose-img-btn"></i>
-                        </div>
-                        <div class="dropdown libelle-select">
-                            <button class="btn dropdown-btn small-btn row-block al-it-center default-gap">
-                                <i class="fa-solid fa-plus add-icon"></i>
-                                <span>Libellé</span>
-                            </button>
-                            <div class="dropdown-content">
-                                <div class="libelles-inputs-container">
-                                    <span>Gérer les libellés</span>
-                                    <div class="horizontal-separator"></div>
-                                    <div id="add-label-btn">
-                                        <div class="row-block default-gap al-it-center clickable-background">
+                    <div class="container">
+                        <div class="inputs-container">
+                            <div class="profile-container">
+                                <img src="./imgs/user_sample.png" alt="profil du contact">
+                                <i class="fa-solid fa-plus add-icon choose-img-btn"></i>
+                            </div>
+                            <div class="dropdown libelle-select">
+                                <button class="btn dropdown-btn small-btn row-block al-it-center default-gap">
+                                    <i class="fa-solid fa-plus add-icon"></i>
+                                    <span>Libellé</span>
+                                </button>
+                                <div class="dropdown-content">
+                                    <div class="libelles-inputs-container">
+                                        <span>Gérer les libellés</span>
+                                        <div class="horizontal-separator"></div>
+                                        <div id="add-label-btn">
+                                            <div class="row-block default-gap al-it-center clickable-background">
+                                                <i class="fa-solid fa-plus add-icon"></i>
+                                                <span>Créer un libellé</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inputs-section-container">
+                                <div class="inputs-section row-block">
+                                    <i class="fa-regular fa-user ic"></i>
+                                    <div class="inputs">
+                                        <div class="names-details-inputs">
+                                            <div class="input-container">
+                                                <label class="label" for="prefixe">Préfixe</label>
+                                                <input placeholder="a" type="text" class="input" id="prefixe">
+                                            </div>
+                                            <div class="input-container">
+                                                <label class="label" for="deuxieme-prenom">Deuxième prénom</label>
+                                                <input placeholder="a" type="text" class="input" id="deuxieme-prenom">
+                                            </div>
+                                        </div>
+                                        <div class="input-container">
+                                            <label class="label" for="prenom">Prénom</label>
+                                            <input placeholder="a" type="text" class="input" id="prenom" required>
+                                        </div>
+                                        <div class="input-container">
+                                            <label class="label" for="nom">Nom</label>
+                                            <input placeholder="a" type="text" class="input" id="nom" required>
+                                        </div>
+                                        <div class="names-details-inputs">
+                                            <div class="input-container">
+                                                <label class="label" for="suffixe">Suffixe</label>
+                                                <input placeholder="a" type="text" class="input" id="suffixe">
+                                            </div>
+                                            <div class="input-container">
+                                                <label class="label" for="prenom-phonetique">Prénom phonétique</label>
+                                                <input placeholder="a" type="text" class="input" id="prenom-phonetique">
+                                            </div>
+                                            <div class="input-container">
+                                                <label class="label" for="deuxieme-prenom-ponetique">2e Prénom
+                                                    phonetique</label>
+                                                <input placeholder="a" type="text" class="input"
+                                                    id="deuxieme-prenom-ponetique">
+                                            </div>
+                                            <div class="input-container">
+                                                <label class="label" for="nom-phonetique">Nom phonétique</label>
+                                                <input placeholder="a" type="text" class="input" id="nom-phonetique">
+                                            </div>
+                                            <div class="input-container">
+                                                <label class="label" for="pseudo">pseudo</label>
+                                                <input placeholder="a" type="text" class="input" id="pseudo">
+                                            </div>
+                                            <div class="input-container">
+                                                <label class="label" for="en-tant-que">Classer en tant que</label>
+                                                <input placeholder="a" type="text" class="input" id="en-tant-que">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <i id="names-switch-details-inputs"
+                                        class="fa-solid fa-chevron-down icon-btn clickable-background ic"></i>
+                                </div>
+                                <div class="inputs-section row-block">
+                                    <i class="fa-regular fa-building ic"></i>
+                                    <div class="inputs">
+                                        <div class="input-container">
+                                            <label class="label" for="entreprise">Entreprise</label>
+                                            <input placeholder="a" type="text" class="input" id="entreprise">
+                                        </div>
+                                        <div class="input-container">
+                                            <label class="label" for="fonction">Fonction</label>
+                                            <input placeholder="a" type="text" class="input" id="fonction">
+                                        </div>
+                                        <div class="entreprise-details-inputs">
+                                            <div class="input-container">
+                                                <label class="label" for="service">Service</label>
+                                                <input placeholder="a" type="text" class="input" id="service">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <i id="entreprise-switch-details-inputs"
+                                        class="fa-solid fa-chevron-down icon-btn clickable-background ic"></i>
+                                </div>
+                                <div class="inputs-section row-block">
+                                    <i class="fa-regular fa-envelope ic"></i>
+                                    <div class="inputs">
+                                        <div class="input-container">
+                                            <label class="label" for="email">E-mail</label>
+                                            <input placeholder="a" type="text" class="input" name="email" id="email">
+                                        </div>
+                                        <div
+                                            class="btn btn-action row-block al-it-center  default-gap just-cont-center">
                                             <i class="fa-solid fa-plus add-icon"></i>
-                                            <span>Créer un libellé</span>
+                                            <span>Ajouter une adresse e-mail</span>
                                         </div>
                                     </div>
+                                    <i class="fa-solid fa-chevron-down icon-btn clickable-background ic hide"></i>
+                                </div>
+                                <div class="inputs-section row-block">
+                                    <i class="fa-solid fa-phone ic"></i>
+                                    <div class="inputs">
+                                        <div class="input-container">
+                                            
+                                            <input placeholder="a" type="text" class="input" id="phone" required>
+                                            <label class="label" class="label" for="phone">téléphone</label>
+                                        </div>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-down icon-btn clickable-background ic hide"></i>
                                 </div>
                             </div>
-                        </div>
-                        <div class="inputs-section-container">
-                            <div class="inputs-section row-block">
-                                <i class="fa-regular fa-user ic"></i>
-                                <div class="inputs">
-                                    <div class="names-details-inputs">
-                                        <div class="input-container">
-                                            <label for="prefixe">Préfixe</label>
-                                            <input type="text" id="prefixe">
-                                        </div>
-                                        <div class="input-container">
-                                            <label for="deuxieme-prenom">Deuxième prénom</label>
-                                            <input type="text" id="deuxieme-prenom">
-                                        </div>
-                                    </div>
-                                    <div class="input-container">
-                                        <label for="prenom">Prénom</label>
-                                        <input type="text" id="prenom" required>
-                                    </div>
-                                    <div class="input-container">
-                                        <label for="nom">Nom</label>
-                                        <input type="text" id="nom" required>
-                                    </div>
-                                    <div class="names-details-inputs">
-                                        <div class="input-container">
-                                            <label for="suffixe">Suffixe</label>
-                                            <input type="text" id="suffixe">
-                                        </div>
-                                        <div class="input-container">
-                                            <label for="prenom-phonetique">Prénom phonétique</label>
-                                            <input type="text" id="prenom-phonetique">
-                                        </div>
-                                        <div class="input-container">
-                                            <label for="deuxieme-prenom-ponetique">2e Prénom phonetique</label>
-                                            <input type="text" id="deuxieme-prenom-ponetique">
-                                        </div>
-                                        <div class="input-container">
-                                            <label for="nom-phonetique">Nom phonétique</label>
-                                            <input type="text" id="nom-phonetique">
-                                        </div>
-                                        <div class="input-container">
-                                            <label for="pseudo">pseudo</label>
-                                            <input type="text" id="pseudo">
-                                        </div>
-                                        <div class="input-container">
-                                            <label for="en-tant-que">Classer en tant que</label>
-                                            <input type="text" id="en-tant-que">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="inputs-section row-block">
-                                <i class="fa-regular fa-building ic"></i>
-                                <div class="inputs">
-                                    <div class="input-container">
-                                        <label for="entreprise">Entreprise</label>
-                                        <input type="text" id="entreprise">
-                                    </div>
-                                    <div class="input-container">
-                                        <label for="fonction">Fonction</label>
-                                        <input type="text" id="fonction">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="inputs-section row-block">
-                                <i class="fa-regular fa-envelope ic"></i>
-                                <div class="inputs">
-                                    <div class="input-container">
-                                        <label for="email">E-mail</label>
-                                        <input type="text" id="email">
-                                    </div>
-                                    <div class="btn btn-action row-block al-it-center  default-gap just-cont-center">
-                                        <i class="fa-solid fa-plus add-icon"></i>
-                                        <span>Ajouter une adresse e-mail</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="inputs-section row-block">
-                                <i class="fa-solid fa-phone ic"></i>
-                                <div class="inputs">
-                                    <div class="input-container">
-                                        <label for="phone">téléphone</label>
-                                        <input type="text" id="phone" required>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
+                        </div>
                     </div>
+
                 </form>
             </div>
         </div>
