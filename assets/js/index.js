@@ -17,7 +17,14 @@ const chekMenu = document.getElementById("menu-check"),
     entrepriseInput = document.getElementById("entreprise"),
     fonctionInput = document.getElementById("fonction"),
     emailInput = document.getElementById("email"),
-    phoneInput = document.getElementById("phone");
+    phoneInput = document.getElementById("phone"),
+    allInputs = document.querySelectorAll(".input-container .input"),
+    entrepriseDisplaySwitchBtn = document.getElementById("entreprise-switch-details-inputs"),
+    namesDisplaySwitchbtn = document.getElementById("names-switch-details-inputs"),
+    allNamesDetailsInputs = document.querySelectorAll(".names-details-inputs"),
+    entrepriseDetailsInput = document.querySelector(".entreprise-details-inputs"),
+    addEmailInputBtn = document.getElementById("add-email-input-btn"),
+    emailsContainer = document.getElementById("emails-container");
 
 //Gestion de menu bar avec le checkbox invisible
 chekMenu.addEventListener('change', (event) => {
@@ -53,11 +60,77 @@ document.addEventListener("click", (event) => {
 //initialisation de l'input pour le téléphone
 window.intlTelInput(phoneInput, {})
 
+//Ajout du style dynamique des labels quand input est focused
+function setInputsEventListenner() {
+    allInputs.forEach(input => {
+        input.addEventListener("focus", (event) => {
+            label = input.parentElement.querySelector("label");
+            if(label==null){
+                label = input.parentElement.parentElement.querySelector("label");
+            }
+            label.classList.add('label-focused')
+        });
+        input.addEventListener("focusout", (event) => {
+            if (input.value === "") {
+                label = input.parentElement.querySelector("label");
+                if(label==null){
+                    label = input.parentElement.parentElement.querySelector("label");
+                }
+                label.classList.remove('label-focused');
+            }
+        });
+    });
+}
+
+setInputsEventListenner();
+
+//Evitons les erreurs (ce test suffit pour savoir si c'est le formulaire qui est chargé)
+if (namesDisplaySwitchbtn) {
+    //switch des états d'affichage pour les inputs des noms
+    namesDisplaySwitchbtn.addEventListener('click', () => {
+        if (allNamesDetailsInputs)
+            allNamesDetailsInputs.forEach(namesDetailsInputs => {
+                if (namesDetailsInputs.classList.contains("invisible")) {
+                    namesDetailsInputs.classList.remove("invisible");
+                    namesDisplaySwitchbtn.classList.remove("fa-chevron-down");
+                    namesDisplaySwitchbtn.classList.add("fa-chevron-up");
+                }
+                else {
+                    namesDetailsInputs.classList.add("invisible");
+                    namesDisplaySwitchbtn.classList.remove("fa-chevron-up");
+                    namesDisplaySwitchbtn.classList.add("fa-chevron-down");
+                }
+            });
+    });
+
+    //switch des états d'affichage pour les inputs des entreprises
+    entrepriseDisplaySwitchBtn.addEventListener("click", () => {
+        if (entrepriseDetailsInput.classList.contains("invisible")) {
+            entrepriseDetailsInput.classList.remove("invisible");
+            entrepriseDisplaySwitchBtn.classList.remove("fa-chevron-down");
+            entrepriseDisplaySwitchBtn.classList.add("fa-chevron-up");
+        }
+        else {
+            entrepriseDetailsInput.classList.add("invisible");
+            entrepriseDisplaySwitchBtn.classList.remove("fa-chevron-up");
+            entrepriseDisplaySwitchBtn.classList.add("fa-chevron-down");
+        }
+    });
+
+    //ajout d'un input E-mail initial
+    addEmailInput(crypto.randomUUID());
+
+    //ajouter un input pour E-mail
+    addEmailInputBtn.addEventListener("click", () => {
+        addEmailInput(crypto.randomUUID());
+    });
+}
+
 //fonction pour ajouter du style dynamique aux rows dans la liste des contacts
-function initContactsCheckboxesStyle(){
+function initContactsCheckboxesStyle() {
     if (contacts_table) {
         const contactsCheckboxes = contacts_table.querySelectorAll("tbody tr td input");
-    
+
         //gestion du style des contacts selectionés
         contactsCheckboxes.forEach(checkbox => {
             checkbox.addEventListener("change", (event) => {
@@ -80,3 +153,46 @@ function initContactsCheckboxesStyle(){
 }
 
 initContactsCheckboxesStyle();
+
+//fonction pour supprimer un élément
+function deleteElement(element) {
+    element.remove();
+}
+
+//fonction pour créer un élément
+function createElement(type, properties = {}) {
+    const element = document.createElement(type);
+    Object.assign(element, properties);
+    return element;
+}
+
+//fonction pour ajouter un emailInput
+function addEmailInput(id) {
+    const iEmailContainer = createElement("div", { className: "input-container row-block al-it-center" });
+    const iLabelForEmail = createElement("label", { for: `${id}`, textContent: "E-mail", className: "label" });
+    const iInputEmail = createElement("input", {
+        placeholder: "a",
+        type: "text",
+        className: "input",
+        id: id,
+        onfocus: () => {
+            iLabelForEmail.classList.add('label-focused');
+        }
+    });
+
+    iInputEmail.addEventListener("focusout", () => {
+        if (iInputEmail.value === "") {
+            iLabelForEmail.classList.remove('label-focused');
+        }
+    })
+
+    const iIconDeleteEmail = createElement("i", {
+        className: "hide fa-solid fa-close icon-btn clickable-background"
+    });
+
+    iEmailContainer.append(iLabelForEmail, iInputEmail, iIconDeleteEmail);
+    emailsContainer.appendChild(iEmailContainer);
+    iIconDeleteEmail.addEventListener('click', () => {
+        deleteElement(iEmailContainer);
+    });
+}

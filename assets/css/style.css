@@ -32,7 +32,7 @@ button {
 }
 
 i {
-    font-size: 20px;
+    font-size: 1.25rem;
 }
 
 a {
@@ -40,7 +40,7 @@ a {
 }
 
 small {
-    font-size: 13px;
+    font-size: .8rem;
     font-weight: 700;
 }
 
@@ -220,7 +220,7 @@ small {
 
 .menu-bars-container i {
     padding: 15px;
-    font-size: 20px;
+    font-size: 1.25rem;
     color: var(--black1);
 }
 
@@ -241,7 +241,7 @@ small {
 
 .logo-link {
     color: var(--black2);
-    font-size: 23px;
+    font-size: 1.4375;
     font-weight: 100;
     gap: 10px;
 }
@@ -262,7 +262,7 @@ small {
 }
 
 .search-container input {
-    font-size: 16px;
+    font-size: 1rem;
     padding: 5px;
     width: 100%;
     background-color: transparent;
@@ -277,7 +277,7 @@ input:focus {
 .search-container i {
     cursor: pointer;
     color: var(--black2);
-    font-size: 20px;
+    font-size: 1.25rem;
     padding: 10px;
     border-radius: 50%;
     margin: 5px;
@@ -289,14 +289,14 @@ input:focus {
 }
 
 .user-profil-container i {
-    font-size: 20px;
+    font-size: 1.25rem;
     padding: 10px;
     background-color: white;
     border-radius: 50%;
 }
 
 .add-icon {
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 
 .btn {
@@ -311,7 +311,7 @@ input:focus {
     background-color: var(--primary-color);
     color: white;
     padding: 10px 20px;
-    font-size: 15px;
+    font-size: .95rem;
 }
 
 .menu-btn {
@@ -321,11 +321,11 @@ input:focus {
     border: none;
     background-color: transparent;
     width: 100%;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .small-btn {
-    font-size: 10px;
+    font-size: 0.62rem;
     border-radius: 5px;
     padding: 5px 10px;
     background-color: white;
@@ -333,7 +333,7 @@ input:focus {
 }
 
 .small-btn i {
-    font-size: 15px;
+    font-size: .95;
 }
 
 .btn:hover {
@@ -394,7 +394,7 @@ input:focus {
 .selected-btn-secondary {
     background-color: var(--primary-transparent-color);
     transition: all ease-in-out 0.2s;
-    font-weight: 700;
+    padding: 20px;
 }
 
 .selected-btn-secondary:hover {
@@ -460,6 +460,14 @@ td {
     opacity: 1;
 }
 
+.invisible{
+    display: none;
+}
+
+.visible{
+    display: block;
+}
+
 .contact-profile {
     display: flex;
     justify-content: center;
@@ -468,7 +476,7 @@ td {
     height: 40px;
     border-radius: 50%;
     margin: 10px;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 500;
     background-color: var(--primary-color);
     color: var(--white1);
@@ -499,7 +507,7 @@ td {
     position: absolute;
     cursor: pointer;
     bottom: 5px;
-    font-size: 16px;
+    font-size: 1rem;
     padding: 13px;
     color: white;
     border-radius: 50%;
@@ -539,6 +547,11 @@ td {
     position: relative;
 }
 
+.input-container:hover .icon-btn{
+    transition: all ease-in-out 0.2s;
+    opacity: 1;
+}
+
 .inputs,
 .iti--allow-dropdown {
     width: 100%;
@@ -565,26 +578,38 @@ td {
     padding: 0 4px;
     background-color: white;
     color: #323f58;
-    font-size: 16px;
-    transition: 0.5s;
-    z-index: 0;
+    font-size: 1rem;
+    transition: 0.3s;
+    z-index: 10;
 }
 
-.input:focus + .label {
+#emails-container .input-container input, #add-email-input-btn{
+    max-width: 563px;
+}
+
+.phone-label{
+    left: 50px;
+}
+
+.label-focused{
+    position: absolute;
     top: -7px;
-    left: 3px;
+    left: 5px;
     z-index: 10;
-    font-size: 14px;
+    font-size: .9rem;
     font-weight: 600;
-    color: var(--blue);
+    color: var(--primary-color);
+    background-color: white;
+    transform: scale(0.9);
 }
 
 .input:not(:placeholder-shown)+ .label {
     top: -7px;
     left: 3px;
     z-index: 10;
-    font-size: 14px;
+    font-size: .9rem;
     font-weight: 600;
+    transform: scale(0.9);
 }
 
 .input::placeholder {
@@ -610,7 +635,7 @@ td {
 }
 
 .libelles-inputs-container #add-label-btn i {
-    font-size: 15px;
+    font-size: .95rem;
     margin: 10px;
     margin-left: 30px;
 }

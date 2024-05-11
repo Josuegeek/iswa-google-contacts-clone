@@ -15,9 +15,18 @@
 
 <body>
     <div class="main-container">
-        <button id="float-btn" class="btn float-btn btn-secondary row-block al-it-center default-gap hide">
-            <i class="fa-solid fa-plus add-icon"></i>
-        </button>
+        <div class="dropdown">
+            <button id="float-btn" class="btn float-btn btn-secondary row-block al-it-center default-gap hide">
+                <i class="fa-solid fa-plus add-icon"></i>
+            </button>
+            <div class="dropdown-content">
+                <div id="create-contact-btn"
+                    class="row-block default-gap clickable-background default-margin">
+                    <i class="fa-regular fa-user"></i>
+                    <span>Créer un contact</span>
+                </div>
+            </div>
+        </div>
         <div class="topbar">
             <div class="left-block">
                 <div class="menu-bars-container clickable-background">
@@ -147,7 +156,7 @@
                                 <div class="inputs-section row-block">
                                     <i class="fa-regular fa-user ic"></i>
                                     <div class="inputs">
-                                        <div class="names-details-inputs">
+                                        <div class="names-details-inputs invisible">
                                             <div class="input-container">
                                                 <label class="label" for="prefixe">Préfixe</label>
                                                 <input placeholder="a" type="text" class="input" id="prefixe">
@@ -165,7 +174,7 @@
                                             <label class="label" for="nom">Nom</label>
                                             <input placeholder="a" type="text" class="input" id="nom" required>
                                         </div>
-                                        <div class="names-details-inputs">
+                                        <div class="names-details-inputs invisible">
                                             <div class="input-container">
                                                 <label class="label" for="suffixe">Suffixe</label>
                                                 <input placeholder="a" type="text" class="input" id="suffixe">
@@ -208,7 +217,7 @@
                                             <label class="label" for="fonction">Fonction</label>
                                             <input placeholder="a" type="text" class="input" id="fonction">
                                         </div>
-                                        <div class="entreprise-details-inputs">
+                                        <div class="entreprise-details-inputs invisible">
                                             <div class="input-container">
                                                 <label class="label" for="service">Service</label>
                                                 <input placeholder="a" type="text" class="input" id="service">
@@ -221,25 +230,23 @@
                                 <div class="inputs-section row-block">
                                     <i class="fa-regular fa-envelope ic"></i>
                                     <div class="inputs">
-                                        <div class="input-container">
-                                            <label class="label" for="email">E-mail</label>
-                                            <input placeholder="a" type="text" class="input" name="email" id="email">
+                                        <div id="emails-container">
+
                                         </div>
-                                        <div
+
+                                        <div id="add-email-input-btn"
                                             class="btn btn-action row-block al-it-center  default-gap just-cont-center">
                                             <i class="fa-solid fa-plus add-icon"></i>
                                             <span>Ajouter une adresse e-mail</span>
                                         </div>
                                     </div>
-                                    <i class="fa-solid fa-chevron-down icon-btn clickable-background ic hide"></i>
                                 </div>
                                 <div class="inputs-section row-block">
                                     <i class="fa-solid fa-phone ic"></i>
                                     <div class="inputs">
                                         <div class="input-container">
-                                            
+                                            <label class="label phone-label" class="label" for="phone">téléphone</label>
                                             <input placeholder="a" type="text" class="input" id="phone" required>
-                                            <label class="label" class="label" for="phone">téléphone</label>
                                         </div>
                                     </div>
                                     <i class="fa-solid fa-chevron-down icon-btn clickable-background ic hide"></i>
