@@ -24,7 +24,13 @@ const chekMenu = document.getElementById("menu-check"),
     allNamesDetailsInputs = document.querySelectorAll(".names-details-inputs"),
     entrepriseDetailsInput = document.querySelector(".entreprise-details-inputs"),
     addEmailInputBtn = document.getElementById("add-email-input-btn"),
-    emailsContainer = document.getElementById("emails-container");
+    emailsContainer = document.getElementById("emails-container"),
+    submitBtn = document.getElementById("submit-btn"),
+    addLabelBtn = document.querySelectorAll(".add-label-btn"),
+    contactsContainer = document.querySelector(".contacts-container"),
+    contactFormContainer = document.querySelector(".contact-form-container"),
+    backToContactsListBtn = document.getElementById("back-to-contacts-list-btn");
+
 
 //Gestion de menu bar avec le checkbox invisible
 chekMenu.addEventListener('change', (event) => {
@@ -44,6 +50,10 @@ chekMenu.addEventListener('change', (event) => {
     }
 });
 
+//bouton de retour
+backToContactsListBtn.addEventListener(('click'), (event) => {
+    showForm();
+});
 
 document.addEventListener("click", (event) => {
     const clickedElement = event.target;
@@ -58,26 +68,36 @@ document.addEventListener("click", (event) => {
 });
 
 //initialisation de l'input pour le téléphone
-window.intlTelInput(phoneInput, {})
+window.intlTelInput(phoneInput, {});
+
+//ajout des ecouteurs pour les boutons add label
+addLabelBtn.forEach(btn => {
+    btn.addEventListener("click", (event) => {
+        showModal(1);
+    });
+});
 
 //Ajout du style dynamique des labels quand input est focused
 function setInputsEventListenner() {
     allInputs.forEach(input => {
         input.addEventListener("focus", (event) => {
-            label = input.parentElement.querySelector("label");
-            if(label==null){
+            var label = input.parentElement.querySelector("label");
+            if (label == null) {
                 label = input.parentElement.parentElement.querySelector("label");
             }
             label.classList.add('label-focused')
         });
         input.addEventListener("focusout", (event) => {
             if (input.value === "") {
-                label = input.parentElement.querySelector("label");
-                if(label==null){
+                var label = input.parentElement.querySelector("label");
+                if (label == null) {
                     label = input.parentElement.parentElement.querySelector("label");
                 }
                 label.classList.remove('label-focused');
             }
+        });
+        input.addEventListener("input", (event) => {
+            switchBtnStateByInputsValues();
         });
     });
 }
@@ -195,4 +215,28 @@ function addEmailInput(id) {
     iIconDeleteEmail.addEventListener('click', () => {
         deleteElement(iEmailContainer);
     });
+}
+
+//switch des etats du bouton enregistrer du formulaire
+function switchBtnStateByInputsValues() {
+    if ((prenomInput.value != "" || nomInput.value != "") && phoneInput.value != "") {
+        submitBtn.disabled = false;
+    }
+    else {
+        submitBtn.disabled = true;
+    }
+}
+
+//afficher/cacher le formulaire de contact
+function showForm() {
+    if (contactFormContainer.classList.contains("hide-form-contact")){
+        contactFormContainer.classList.remove("hide-form-contact");
+        contactFormContainer.classList.add("show-form-contact");
+        contactsContainer.classList.add('invisible');
+    }     
+    else {
+        contactFormContainer.classList.remove("show-form-contact");
+        contactFormContainer.classList.add("hide-form-contact");
+        contactsContainer.classList.remove('invisible');
+    }
 }

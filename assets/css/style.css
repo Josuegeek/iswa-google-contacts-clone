@@ -16,6 +16,24 @@
     --secondary-color: #f1f3f4;
 }
 
+@keyframes fromRightToCenter {
+    from {
+        transform: translateX(-1000%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fromCenterToRight {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-1000%);
+    }
+}
+
 body {
     padding: 0px;
     margin: 0px;
@@ -190,7 +208,6 @@ small {
     margin: 0 20px 30px 20px;
     transition: all ease 0.3s;
     width: calc(100% - 248px);
-    height: calc(100% - 120px);
 }
 
 .main-frame-fill-side {
@@ -379,10 +396,36 @@ input:focus {
     background-color: var(--gray-2);
 }
 
-.float-btn {
+.btn-secondary2{
+    background-color: transparent;
+    color: var(--primary-color);
+    padding: 10px 20px;
+    transition: all ease-in-out 0.3s;
+}
+
+.btn-secondary2:hover{
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-secondary3{
+    background-color: transparent;
+    color: var(--primary-color);
+    transition: all ease-in-out 0.3s;
+}
+
+.btn-secondary3:hover{
+    background-color: var(--gray-2);
+}
+
+.float-btn-container{
     position: absolute;
-    bottom: 35px;
-    right: 25px;
+    width: fit-content;
+    right: 35px;
+    bottom: 50px;
+}
+
+.float-btn {
     padding: 15px 18px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 2px 4px 0px, rgba(60, 64, 67, 0.15) 0px 2px 5px 1px;
 }
@@ -542,7 +585,7 @@ td {
     padding-bottom: 25px;
 }
 
-.inputs .input-container {
+.input-container {
     margin: 15px 0px;
     position: relative;
 }
@@ -698,4 +741,20 @@ td {
 .libelle-view {
     padding: 10px;
     border-radius: 20px;
+}
+
+.form-title{
+    font-size: 1.5rem;
+}
+
+.hide-form-contact{
+    background-color: white;
+    right: -1000%;
+    transition: all ease-in-out 0.3s;
+    animation: fromCenterToRight 0.3s alternate 0s;
+    opacity: 0;
+}
+
+.show-form-contact{
+    animation: fromRightToCenter 0.3s alternate 0s;
 }

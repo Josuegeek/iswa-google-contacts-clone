@@ -10,23 +10,41 @@
     <link rel="icon" href="./imgs/contats-icon.png">
     <link rel="stylesheet" href="./assets/phone-number-validator/css/demo.css">
     <link rel="stylesheet" href="./assets/phone-number-validator/css/intlTelInput.css">
+    <link rel="stylesheet" href="./assets/iswa.modal/iswa.modal.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
+    <!----modal pour les libellés---->
+    <form class="iswa--modal">
+        <span class="form-title">Créer un libellé</span>
+        <div class="input-container">
+            <label class="label" for="label-input">Libellé</label>
+            <input class="input" type="text" placeholder="a" id="label-input">
+        </div>
+        <div class="row-block">
+            <button class="btn btn-secondary3">Non, ne rien faire</button>
+            <button class="btn btn-secondary2">Ajouter</button>
+        </div>
+    </form>
+
+    <!----container principal---->
     <div class="main-container">
-        <div class="dropdown">
-            <button id="float-btn" class="btn float-btn btn-secondary row-block al-it-center default-gap hide">
+
+        <!----Bouton flottant---->
+        <div class="dropdown float-btn-container">
+            <button id="float-btn" class="btn float-btn btn-secondary row-block al-it-center default-gap invisible">
                 <i class="fa-solid fa-plus add-icon"></i>
             </button>
             <div class="dropdown-content">
-                <div id="create-contact-btn"
-                    class="row-block default-gap clickable-background default-margin">
+                <div id="create-contact-btn" class="row-block default-gap clickable-background default-margin">
                     <i class="fa-regular fa-user"></i>
                     <span>Créer un contact</span>
                 </div>
             </div>
         </div>
+
+        <!----le Topbar---->
         <div class="topbar">
             <div class="left-block">
                 <div class="menu-bars-container clickable-background">
@@ -49,7 +67,11 @@
 
             </div>
         </div>
+
+        <!----fenetre principale/partie qui suit le topbar---->
         <div class="main-side">
+
+            <!----Menu de navigation gauche---->
             <div class="left-navigation">
                 <div class="add-contact-btn-container">
                     <div class="dropdown">
@@ -85,7 +107,8 @@
                     <div class="libelles-container">
                         <div class="libelle-title row-block just-cont-space-between al-it-center">
                             <span>Libellés</span>
-                            <i id="add-label-btn" class="fa-solid fa-plus add-icon clickable-background"></i>
+                            <i id="add-label-btn"
+                                class="fa-solid fa-plus add-icon clickable-background iswa--modal-btn"></i>
                         </div>
                         <div class="libelles-list">
                             <div class="libelle-view clickable-background">
@@ -119,10 +142,14 @@
                     </div>
                 </div>
             </div>
-            <div class="main-frame">
+
+            <!----la frame principale---->
+            <div id="main-frame" class="main-frame">
+
+                <!----Formulaire des contacts---->
                 <form class="contact-form-container column-block default-gap" action="">
                     <div class="top-controls row-block just-cont-space-between al-it-center">
-                        <i class="fa-solid fa-arrow-left icon-btn clickable-background"></i>
+                        <i id="back-to-contacts-list-btn" class="fa-solid fa-arrow-left icon-btn clickable-background"></i>
                         <div class="row-block default-gap al-it-center">
                             <i class="fa-regular fa-star icon-btn clickable-background"></i>
                             <button id="submit-btn" class="btn btn-primary" disabled>Enregistrer</button>
@@ -143,7 +170,7 @@
                                     <div class="libelles-inputs-container">
                                         <span>Gérer les libellés</span>
                                         <div class="horizontal-separator"></div>
-                                        <div id="add-label-btn">
+                                        <div id="add-label-btn" class="add-label-btn">
                                             <div class="row-block default-gap al-it-center clickable-background">
                                                 <i class="fa-solid fa-plus add-icon"></i>
                                                 <span>Créer un libellé</span>
@@ -172,7 +199,7 @@
                                         </div>
                                         <div class="input-container">
                                             <label class="label" for="nom">Nom</label>
-                                            <input placeholder="a" type="text" class="input" id="nom" required>
+                                            <input placeholder="a" type="text" class="input" id="nom">
                                         </div>
                                         <div class="names-details-inputs invisible">
                                             <div class="input-container">
@@ -257,7 +284,75 @@
                     </div>
 
                 </form>
+
+                <!----Liste des contacts---->
+                <div class="contacts-container column-block default-gap invisible">
+                    <div class="contacts-title-container row-block default-gap al-it-center">
+                        <h1 class="frame-title">Contacts</h1> <small>(100)</small>
+                    </div>
+                    <table id="contacts-table">
+                        <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>E-mail</th>
+                                <th>Numéro de téléphone</th>
+                                <th>Fonction et entreprise</th>
+                                <th>Libellés</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="contact-controls row-block just-cont-space-between al-it-center hide">
+                                        <input type="checkbox" name="contact-check" id="contact-check">
+                                        <div class="right-contacts-controls row-block default-gap al-it-center">
+                                            <i class="fa-regular fa-pen-to-square icon-btn clickable-background"></i>
+                                            <i class="fa-solid fa-ellipsis-vertical icon-btn clickable-background"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row-block default-gap al-it-center">
+                                        <span class="contact-profile">A</span>
+                                        <span>Iswa Senteri Josué</span>
+                                    </div>
+                                </td>
+                                <td>iswajosuepro@gmail.com</td>
+                                <td>+243 813662364</td>
+                                <td>Developpeur Kadea</td>
+                                <td>
+                                    <div class="row-block flex-wrap--wrap default-gap">
+                                        <div class="lbl-model">Bureau</div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="contact-controls row-block just-cont-space-between al-it-center hide">
+                                        <input type="checkbox" name="contact-check" id="contact-check">
+                                        <div class="right-contacts-controls row-block default-gap al-it-center">
+                                            <i class="fa-regular fa-pen-to-square icon-btn clickable-background"></i>
+                                            <i class="fa-solid fa-ellipsis-vertical icon-btn clickable-background"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row-block default-gap al-it-center">
+                                        <span class="contact-profile">A</span>
+                                        <span>Iswa Senteri Josué</span>
+                                    </div>
+                                </td>
+                                <td>iswajosuepro@gmail.com</td>
+                                <td>+243 813662364</td>
+                                <td>Developpeur Kadea</td>
+                                <td>
+                                    <div class="row-block flex-wrap--wrap default-gap">
+                                        <div class="lbl-model">Bureau</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
+
         </div>
 
     </div>
@@ -266,6 +361,7 @@
 
     <script src="./assets/iswa.dropdown/iswa.dropdown.js"></script>
     <script src="./assets/phone-number-validator/js/intlTelInput.js"></script>
+    <script src="./assets/iswa.modal/iswa.modal.js"></script>
     <script src="./assets/js/index.js"></script>
 </body>
 
