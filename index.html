@@ -11,16 +11,18 @@
     <link rel="stylesheet" href="./assets/phone-number-validator/css/demo.css">
     <link rel="stylesheet" href="./assets/phone-number-validator/css/intlTelInput.css">
     <link rel="stylesheet" href="./assets/iswa.modal/iswa.modal.css">
+    <link rel="stylesheet" href="./assets/iswa.alert.confirm/iswa-alert-confirm.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
+
     <!----modal pour les libellés---->
     <form class="iswa--modal">
         <span class="form-title">Créer un libellé</span>
         <div class="input-container">
             <label class="label" for="label-input">Libellé</label>
-            <input class="input" type="text" placeholder="a" id="label-input">
+            <input class="input" type="text" placeholder="a" id="label-input" required>
         </div>
         <div class="row-block">
             <button class="btn btn-secondary3">Non, ne rien faire</button>
@@ -37,10 +39,10 @@
                 <i class="fa-solid fa-plus add-icon"></i>
             </button>
             <div class="dropdown-content">
-                <div id="create-contact-btn" class="row-block default-gap clickable-background default-margin">
+                <button id="create-contact-btn" class="row-block default-gap clickable-background default-margin">
                     <i class="fa-regular fa-user"></i>
                     <span>Créer un contact</span>
-                </div>
+                </button>
             </div>
         </div>
 
@@ -111,33 +113,7 @@
                                 class="fa-solid fa-plus add-icon clickable-background iswa--modal-btn"></i>
                         </div>
                         <div class="libelles-list">
-                            <div class="libelle-view clickable-background">
-                                <div class="row-block just-cont-space-between al-it-center  ">
-                                    <div class="row-block default-gap">
-                                        <i class="fa-solid fa-ticket"></i>
-                                        <span>Bureau</span>
-                                    </div>
-                                    <small>10</small>
-                                </div>
-                            </div>
-                            <div class="libelle-view clickable-background">
-                                <div class="row-block just-cont-space-between al-it-center  ">
-                                    <div class="row-block default-gap">
-                                        <i class="fa-solid fa-ticket"></i>
-                                        <span>Bureau</span>
-                                    </div>
-                                    <small>10</small>
-                                </div>
-                            </div>
-                            <div class="libelle-view clickable-background">
-                                <div class="row-block just-cont-space-between al-it-center  ">
-                                    <div class="row-block default-gap">
-                                        <i class="fa-solid fa-ticket"></i>
-                                        <span>Bureau</span>
-                                    </div>
-                                    <small>10</small>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -147,7 +123,7 @@
             <div id="main-frame" class="main-frame">
 
                 <!----Formulaire des contacts---->
-                <form class="contact-form-container column-block default-gap" action="">
+                <form class="contact-form-container column-block default-gap invisible" action="">
                     <div class="top-controls row-block just-cont-space-between al-it-center">
                         <i id="back-to-contacts-list-btn" class="fa-solid fa-arrow-left icon-btn clickable-background"></i>
                         <div class="row-block default-gap al-it-center">
@@ -286,7 +262,7 @@
                 </form>
 
                 <!----Liste des contacts---->
-                <div class="contacts-container column-block default-gap invisible">
+                <div class="contacts-container column-block default-gap">
                     <div class="contacts-title-container row-block default-gap al-it-center">
                         <h1 class="frame-title">Contacts</h1> <small>(100)</small>
                     </div>
@@ -307,7 +283,19 @@
                                         <input type="checkbox" name="contact-check" id="contact-check">
                                         <div class="right-contacts-controls row-block default-gap al-it-center">
                                             <i class="fa-regular fa-pen-to-square icon-btn clickable-background"></i>
-                                            <i class="fa-solid fa-ellipsis-vertical icon-btn clickable-background"></i>
+                                            <div class="dropdown">
+                                                <i class="fa-solid fa-ellipsis-vertical icon-btn clickable-background"></i>
+                                                <div class="dropdown-content dropdown-content-b-right dropdown-menu">
+                                                    <div class="row-block default-gap default-padding al-it-center clickable-background">
+                                                        <i class="fa-solid fa-ticket"></i>
+                                                        <span>Ajouter un libellé</span>
+                                                    </div>
+                                                    <div class="row-block default-gap default-padding al-it-center clickable-background">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                        <span>Supprimer</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row-block default-gap al-it-center">
@@ -330,7 +318,19 @@
                                         <input type="checkbox" name="contact-check" id="contact-check">
                                         <div class="right-contacts-controls row-block default-gap al-it-center">
                                             <i class="fa-regular fa-pen-to-square icon-btn clickable-background"></i>
-                                            <i class="fa-solid fa-ellipsis-vertical icon-btn clickable-background"></i>
+                                            <div class="dropdown">
+                                                <i class="fa-solid fa-ellipsis-vertical icon-btn clickable-background"></i>
+                                                <div class="dropdown-content dropdown-content-b-right dropdown-menu">
+                                                    <div class="row-block default-gap default-padding al-it-center clickable-background">
+                                                        <i class="fa-solid fa-ticket"></i>
+                                                        <span>Ajouter un libellé</span>
+                                                    </div>
+                                                    <div class="row-block default-gap default-padding al-it-center clickable-background">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                        <span>Supprimer</span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row-block default-gap al-it-center">
@@ -362,7 +362,9 @@
     <script src="./assets/iswa.dropdown/iswa.dropdown.js"></script>
     <script src="./assets/phone-number-validator/js/intlTelInput.js"></script>
     <script src="./assets/iswa.modal/iswa.modal.js"></script>
+    <script src="./assets/iswa.alert.confirm/iswa-alert-confirm.js"></script>
     <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/app.js"></script>
 </body>
 
 </html>

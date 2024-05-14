@@ -29,7 +29,9 @@ const chekMenu = document.getElementById("menu-check"),
     addLabelBtn = document.querySelectorAll(".add-label-btn"),
     contactsContainer = document.querySelector(".contacts-container"),
     contactFormContainer = document.querySelector(".contact-form-container"),
-    backToContactsListBtn = document.getElementById("back-to-contacts-list-btn");
+    backToContactsListBtn = document.getElementById("back-to-contacts-list-btn"),
+    addNewContactbtn = document.querySelectorAll('#create-contact-btn'),
+    libellesList = document.querySelector(".libelles-list");
 
 
 //Gestion de menu bar avec le checkbox invisible
@@ -50,9 +52,16 @@ chekMenu.addEventListener('change', (event) => {
     }
 });
 
+//bouton de création d'un nouvel contact(Formulaire)
+addNewContactbtn.forEach(btn => {
+    btn.addEventListener("click", (event) => {
+        showForm();
+    });
+})
+
 //bouton de retour
 backToContactsListBtn.addEventListener(('click'), (event) => {
-    showForm();
+    hideForm();
 });
 
 document.addEventListener("click", (event) => {
@@ -61,7 +70,7 @@ document.addEventListener("click", (event) => {
 
     //fermer tous les dropdowns ouverts si on click à coté
     allDropdowns.forEach(dropdown_ckeck => {
-        if (clickedElement != dropdown_ckeck) {
+        if (clickedElement != dropdown_ckeck && clickedElement != addNewContactbtn) {
             dropdown_ckeck.checked = false;
         }
     });
@@ -149,7 +158,7 @@ if (namesDisplaySwitchbtn) {
 //fonction pour ajouter du style dynamique aux rows dans la liste des contacts
 function initContactsCheckboxesStyle() {
     if (contacts_table) {
-        const contactsCheckboxes = contacts_table.querySelectorAll("tbody tr td input");
+        const contactsCheckboxes = contacts_table.querySelectorAll("tbody tr td .checkbox");
 
         //gestion du style des contacts selectionés
         contactsCheckboxes.forEach(checkbox => {
@@ -227,16 +236,31 @@ function switchBtnStateByInputsValues() {
     }
 }
 
-//afficher/cacher le formulaire de contact
+//afficher le formulaire de contact
 function showForm() {
-    if (contactFormContainer.classList.contains("hide-form-contact")){
+    if (contactFormContainer.classList.contains("invisible")) {
+        contactFormContainer.classList.remove("invisible");
         contactFormContainer.classList.remove("hide-form-contact");
         contactFormContainer.classList.add("show-form-contact");
         contactsContainer.classList.add('invisible');
-    }     
-    else {
+    }
+}
+
+//cacher le formulaire
+function hideForm() {
+    if (submitBtn.disabled) {
+        contactFormContainer.classList.add("invisible");
         contactFormContainer.classList.remove("show-form-contact");
         contactFormContainer.classList.add("hide-form-contact");
         contactsContainer.classList.remove('invisible');
     }
+    else {
+        if (confirm("Annuler l'enregistrement ?")) {
+            contactFormContainer.classList.add("invisible");
+            contactFormContainer.classList.remove("show-form-contact");
+            contactFormContainer.classList.add("hide-form-contact");
+            contactsContainer.classList.remove('invisible');
+        }
+    }
+
 }

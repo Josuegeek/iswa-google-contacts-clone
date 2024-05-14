@@ -1,0 +1,84 @@
+@keyframes zoom {
+    from {
+        transform: scale(0, 0);
+    }
+
+    to {
+        transform: scale(1, 1);
+    }
+}
+
+.iswa--confirm-container {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    background-color: rgba(175, 176, 177, 0.521);
+    z-index: 100000;
+}
+
+.iswa--confirm {
+    position: relative;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    width: 300px;
+    height: fit-content;
+    margin-top: 30px;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px var(--black2);
+    animation: zoom 0.3s alternate 0s;
+}
+
+.iswa--confirm-title {
+    padding: 10px;
+    text-align: center;
+    color: #0957d0;
+    font-size: 20px;
+}
+
+.iswa--confirm-msg{
+    padding: 10px;
+    text-align: center;
+}
+
+.iswa--confirm-separator {
+    width: 100%;
+    height: 1px;
+    background-color: rgb(196, 193, 193);
+}
+
+.iswa--confirm-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: 10px;
+    border: none;
+    transition: all ease-in-out 0.3s;
+    cursor: pointer;
+}
+
+.iswa--confirm-btn-container{
+    width: 100%;
+    display: flex;
+    gap: 5px;
+    padding: 10px;
+    justify-content: flex-end;
+}
+
+.iswa--confirm-btn:hover{
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 2px 4px 0px, rgba(60, 64, 67, 0.15) 0px 2px 5px 1px;
+}
+
+.iswa--confirm-primary {
+    background-color: #0957d0;
+    color: white;
+}
+
+.iswa--confirm-secondary {
+    color: #0957d0;
+}

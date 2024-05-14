@@ -10,6 +10,7 @@
     border-radius: 5px;
     height: fit-content;
     transform: scale(1,1);
+    padding:10px ;
 }
 
 .dropdown-content {
@@ -18,10 +19,32 @@
     box-shadow: rgba(60, 64, 67, 0.3) 0px 2px 4px 0px, rgba(60, 64, 67, 0.15) 0px 2px 5px 1px;
     z-index: 10000;
     min-width: max-content;
-    margin-right: 20px;
     gap: 3px;
     transform: scale(0,0);
     transition: all ease-in-out 0.05s;
+}
+
+.dropdown-content-b-right{
+    right: 0;
+}
+
+.dropdown-content-b-left{
+    left: 0;
+}
+
+.dropdown-content-t{
+    top: -100%;
+    left: calc(-100%/2);
+}
+
+.dropdown-content-t-left{
+    top: -100%;
+    left: 0;
+}
+
+.dropdown-content-t-right{
+    top: -100%;
+    right: 0;
 }
 
 .dropdown-btn{

@@ -18,7 +18,7 @@
 
 @keyframes fromRightToCenter {
     from {
-        transform: translateX(-1000%);
+        transform: translateX(1000px);
     }
     to {
         transform: translateX(0);
@@ -28,9 +28,11 @@
 @keyframes fromCenterToRight {
     from {
         transform: translateX(0);
+        display:flex;
     }
     to {
-        transform: translateX(-1000%);
+        transform: translateX(1000px);
+        display: none;
     }
 }
 
@@ -42,7 +44,6 @@ body {
     font-size: 16px;
     color: var(--black1);
     height: 100vh;
-    transition: all ease-in-out 0.3s;
 }
 
 button {
@@ -382,6 +383,10 @@ input:focus {
     box-shadow: rgba(60, 64, 67, 0.3) 0px 2px 4px 0px, rgba(60, 64, 67, 0.15) 0px 2px 5px 1px;
 }
 
+.dropdown-menu,.dropdown-menu i{
+    font-size: 12px;
+}
+
 .btn-secondary {
     font-size: 1.05rem;
     height: 56px;
@@ -712,7 +717,6 @@ td {
 
 .right-contacts-controls {
     opacity: 0;
-    margin-right: 17px;
     background-color: var(--hover-color);
     transition: all ease-in-out 0.2s;
 }
@@ -735,6 +739,7 @@ td {
 }
 
 .libelles-list {
+    font-size: 12px;
     padding: 0px 15px 0% 15px;
 }
 
@@ -749,12 +754,10 @@ td {
 
 .hide-form-contact{
     background-color: white;
-    right: -1000%;
-    transition: all ease-in-out 0.3s;
-    animation: fromCenterToRight 0.3s alternate 0s;
-    opacity: 0;
+    animation: fromCenterToRight 1s forwards 0s;
+    position: absolute;
 }
 
 .show-form-contact{
-    animation: fromRightToCenter 0.3s alternate 0s;
+    animation: fromRightToCenter .3s alternate 0s;
 }

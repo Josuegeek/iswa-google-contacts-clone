@@ -32,7 +32,7 @@
     background-color: aliceblue;
     display: flex;
     flex-direction: column;
-    width: 300px;
+    min-width: 300px;
     padding: 30px;
     border-radius: 20px;
     box-shadow: 0 2px 8px var(--black2);
