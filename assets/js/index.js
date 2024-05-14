@@ -31,7 +31,9 @@ const chekMenu = document.getElementById("menu-check"),
     contactFormContainer = document.querySelector(".contact-form-container"),
     backToContactsListBtn = document.getElementById("back-to-contacts-list-btn"),
     addNewContactbtn = document.querySelectorAll('#create-contact-btn'),
-    libellesList = document.querySelector(".libelles-list");
+    libellesList = document.querySelector(".libelles-list"),
+    contactsTbody = document.querySelector("tbody"), 
+    contactsNumbersLbl = document.querySelectorAll(".contacts-number-lbl");
 
 
 //Gestion de menu bar avec le checkbox invisible
@@ -86,11 +88,11 @@ addLabelBtn.forEach(btn => {
     });
 });
 
-//Ajout du style dynamique des labels quand input est focused
+//Ajout du style dynamique des labels quand input est changé
 function setInputsEventListenner() {
     allInputs.forEach(input => {
         input.addEventListener("focus", (event) => {
-            var label = input.parentElement.querySelector("label");
+            let label = input.parentElement.querySelector("label");
             if (label == null) {
                 label = input.parentElement.parentElement.querySelector("label");
             }
@@ -98,7 +100,7 @@ function setInputsEventListenner() {
         });
         input.addEventListener("focusout", (event) => {
             if (input.value === "") {
-                var label = input.parentElement.querySelector("label");
+                let label = input.parentElement.querySelector("label");
                 if (label == null) {
                     label = input.parentElement.parentElement.querySelector("label");
                 }
