@@ -3,6 +3,10 @@ var allContacts = [],
     allLabels = [{
         name:"Label custom",
         number:0
+    },
+    {
+        name:"label 2",
+        number:"10"
     }];
 
 showLabels();
