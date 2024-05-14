@@ -81,7 +81,7 @@ small {
 }
 
 .al-it-end {
-    align-items: end;
+    align-items: flex-end;
 }
 
 .al-self-center {
@@ -125,7 +125,6 @@ small {
 }
 
 .default-gap {
-    display: flex;
     gap: 10px;
 }
 
@@ -144,6 +143,18 @@ small {
 
 .default-mg-top {
     margin-top: 15px;
+}
+
+.width-1OO{
+    width: 100%;
+}
+
+.height-100{
+    height: 100%;
+}
+
+.scroll-x-overflow{
+    overflow-x: scroll;
 }
 
 .dropdown-content {
@@ -442,7 +453,6 @@ input:focus {
 .selected-btn-secondary {
     background-color: var(--primary-transparent-color);
     transition: all ease-in-out 0.2s;
-    padding: 20px;
 }
 
 .selected-btn-secondary:hover {
@@ -471,6 +481,10 @@ input:focus {
 th,
 td {
     text-align: start;
+}
+
+.td-label{
+    max-width: 100px;
 }
 
 #contacts-table thead tr th {

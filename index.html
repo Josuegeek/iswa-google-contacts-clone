@@ -24,7 +24,7 @@
             <label class="label" for="label-input">Libellé</label>
             <input class="input" type="text" placeholder="a" id="label-input" required>
         </div>
-        <div class="row-block">
+        <div class="row-block just-cont-end">
             <button class="btn btn-secondary3">Non, ne rien faire</button>
             <button class="btn btn-secondary2">Ajouter</button>
         </div>
@@ -58,7 +58,7 @@
                     <span>Contacts</span>
                 </a>
                 <div class="search-container row-block al-it-center default-gap">
-                    <i class="fa-solid fa-magnifying-glass clickable-background"></i>
+                    <i id="btn-search-contacts" class="fa-solid fa-magnifying-glass clickable-background"></i>
                     <input type="text" id="search-contacts-input" placeholder="Rechercher">
                 </div>
             </div>
@@ -91,14 +91,14 @@
                     </div>
 
                 </div>
-                <div class="column default-mg-top">
+                <div class="column default-mg-top default-gap">
                     <button id="all-contacts-btn"
-                        class="menu-btn row-block al-it-center just-cont-space-between selected-btn-secondary">
+                        class="menu-btn row-block al-it-center just-cont-space-between clickable-background selected-btn-secondary">
                         <div class="row gap-big">
                             <i class="fa-solid fa-user"></i>
                             <span>Contacts</span>
                         </div>
-                        <small id="contacts-number-lbl">100</small>
+                        <small class="contacts-number-lbl"></small>
                     </button>
                     <button id="recents-contacts-btn" class="menu-btn row-block al-it-center clickable-background">
                         <div class="row gap-big">
@@ -264,7 +264,7 @@
                 <!----Liste des contacts---->
                 <div class="contacts-container column-block default-gap">
                     <div class="contacts-title-container row-block default-gap al-it-center">
-                        <h1 class="frame-title">Contacts</h1> <small>(100)</small>
+                        <h1 class="frame-title">Contacts</h1> <small class="contacts-number-lbl"></small>
                     </div>
                     <table id="contacts-table">
                         <thead>
@@ -277,76 +277,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <div class="contact-controls row-block just-cont-space-between al-it-center hide">
-                                        <input type="checkbox" name="contact-check" id="contact-check">
-                                        <div class="right-contacts-controls row-block default-gap al-it-center">
-                                            <i class="fa-regular fa-pen-to-square icon-btn clickable-background"></i>
-                                            <div class="dropdown">
-                                                <i class="fa-solid fa-ellipsis-vertical icon-btn clickable-background"></i>
-                                                <div class="dropdown-content dropdown-content-b-right dropdown-menu">
-                                                    <div class="row-block default-gap default-padding al-it-center clickable-background">
-                                                        <i class="fa-solid fa-ticket"></i>
-                                                        <span>Ajouter un libellé</span>
-                                                    </div>
-                                                    <div class="row-block default-gap default-padding al-it-center clickable-background">
-                                                        <i class="fa-solid fa-trash"></i>
-                                                        <span>Supprimer</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row-block default-gap al-it-center">
-                                        <span class="contact-profile">A</span>
-                                        <span>Iswa Senteri Josué</span>
-                                    </div>
-                                </td>
-                                <td>iswajosuepro@gmail.com</td>
-                                <td>+243 813662364</td>
-                                <td>Developpeur Kadea</td>
-                                <td>
-                                    <div class="row-block flex-wrap--wrap default-gap">
-                                        <div class="lbl-model">Bureau</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="contact-controls row-block just-cont-space-between al-it-center hide">
-                                        <input type="checkbox" name="contact-check" id="contact-check">
-                                        <div class="right-contacts-controls row-block default-gap al-it-center">
-                                            <i class="fa-regular fa-pen-to-square icon-btn clickable-background"></i>
-                                            <div class="dropdown">
-                                                <i class="fa-solid fa-ellipsis-vertical icon-btn clickable-background"></i>
-                                                <div class="dropdown-content dropdown-content-b-right dropdown-menu">
-                                                    <div class="row-block default-gap default-padding al-it-center clickable-background">
-                                                        <i class="fa-solid fa-ticket"></i>
-                                                        <span>Ajouter un libellé</span>
-                                                    </div>
-                                                    <div class="row-block default-gap default-padding al-it-center clickable-background">
-                                                        <i class="fa-solid fa-trash"></i>
-                                                        <span>Supprimer</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row-block default-gap al-it-center">
-                                        <span class="contact-profile">A</span>
-                                        <span>Iswa Senteri Josué</span>
-                                    </div>
-                                </td>
-                                <td>iswajosuepro@gmail.com</td>
-                                <td>+243 813662364</td>
-                                <td>Developpeur Kadea</td>
-                                <td>
-                                    <div class="row-block flex-wrap--wrap default-gap">
-                                        <div class="lbl-model">Bureau</div>
-                                    </div>
-                                </td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
@@ -358,12 +289,11 @@
     </div>
 
 
-
-    <script src="./assets/iswa.dropdown/iswa.dropdown.js"></script>
     <script src="./assets/phone-number-validator/js/intlTelInput.js"></script>
     <script src="./assets/iswa.modal/iswa.modal.js"></script>
     <script src="./assets/iswa.alert.confirm/iswa-alert-confirm.js"></script>
     <script src="./assets/js/index.js"></script>
+    <script src="./assets/iswa.dropdown/iswa.dropdown.js"></script>
     <script src="./assets/js/app.js"></script>
 </body>
 
