@@ -4,8 +4,8 @@
     --primary-transparent-color2: #a3d5f7;
     --background-color: #f7fafd;
     --hover-color: #ebf4fd;
-    --black1: #001d35;
-    --black2: #797777;
+    --black1: #222731;
+    --black2: #5e5c5c;
     --orange: #e99b0a;
     --white1: #eff3fb;
     --orange-t: #e99b0a49;
@@ -157,6 +157,10 @@ small {
     overflow-x: scroll;
 }
 
+.c-green{
+    color: green;
+}
+
 .dropdown-content {
     padding: 5px 0px;
     background-color: var(--white1);
@@ -166,7 +170,8 @@ small {
     flex-wrap: wrap;
 }
 
-.center {
+.al-center {
+    display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -299,6 +304,17 @@ small {
     margin: 0px 10px 0px 0px;
 }
 
+#photo-input{
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 5px;
+    left: 0px;
+    top: 0px;
+    cursor: pointer;
+}
+
 input:focus {
     outline: none;
 }
@@ -350,7 +366,7 @@ input:focus {
     border: none;
     background-color: transparent;
     width: 100%;
-    font-size: 1rem;
+    font-size: 0.95rem;
 }
 
 .small-btn {
@@ -362,7 +378,7 @@ input:focus {
 }
 
 .small-btn i {
-    font-size: .95;
+    font-size: .95rem;
 }
 
 .btn:hover {
@@ -386,20 +402,30 @@ input:focus {
     color: var(--black2);
 }
 
-.add-contact-btn-container #dropdown-check {
+.add-contact-btn-container .dropdown-check {
     width: 201px;
 }
 
-#dropdown-check:hover~.btn {
+.dropdown-check:hover~.btn {
     box-shadow: rgba(60, 64, 67, 0.3) 0px 2px 4px 0px, rgba(60, 64, 67, 0.15) 0px 2px 5px 1px;
 }
 
-.dropdown-menu,.dropdown-menu i{
+.dropdown-menu{
+    font-size: 12px;
+    width: 250px;
+}
+
+.control-small{
+    padding: 12px 10px;
+    font-weight: 100;
+}
+
+.dropdown-menu i{
     font-size: 12px;
 }
 
 .btn-secondary {
-    font-size: 1.05rem;
+    font-size: .9rem;
     height: 56px;
     border-radius: 15px;
     padding: 30px 23px;
@@ -425,6 +451,7 @@ input:focus {
 }
 
 .btn-secondary3{
+    font-size: 0.9rem;
     background-color: transparent;
     color: var(--primary-color);
     transition: all ease-in-out 0.3s;
@@ -496,7 +523,7 @@ td {
     margin-right: 5px;
 }
 
-#contacts-table tbody tr:hover {
+.row-style:hover {
     cursor: pointer;
     background-color: var(--hover-color);
     transition: all ease-in-out 0.15s;
@@ -512,6 +539,10 @@ td {
 
 .selected-row {
     background-color: var(--primary-transparent-color);
+}
+
+.selected-row:hover{
+    background-color: var(--primary-transparent-color2);
 }
 
 .hide {
@@ -540,6 +571,8 @@ td {
     margin: 10px;
     font-size: 1.25rem;
     font-weight: 500;
+    background-size: cover;
+    background-position: center;
     background-color: var(--primary-color);
     color: var(--white1);
 }
@@ -559,10 +592,13 @@ td {
     width: fit-content;
 }
 
-.profile-container img {
+.contact-img {
     width: 162px;
     height: 162px;
     border-radius: 50%;
+    background-image: url("../../imgs/user_sample.png");
+    background-size: cover;
+    background-position: center;
 }
 
 .choose-img-btn {
@@ -576,6 +612,8 @@ td {
     background-color: var(--primary-color);
     border: 3px solid white;
     right: 0px;
+    width: 50px;
+    height: 50px;
 }
 
 .container {
@@ -687,8 +725,6 @@ td {
     display: flex;
     flex-direction: column;
     width: 200px;
-    align-items: center;
-    padding: 15px 0px;
     gap: 10px;
 }
 
@@ -720,7 +756,7 @@ td {
     opacity: 1;
 }
 
-.contact-controls input[type="checkbox"] {
+.contact-controls .check-contact {
     width: 20px;
     height: 20px;
 }
@@ -730,9 +766,19 @@ td {
 }
 
 .right-contacts-controls {
+    height: 100%;
+    padding: 5px;
     opacity: 0;
     background-color: var(--hover-color);
     transition: all ease-in-out 0.2s;
+}
+
+.right-contacts-controls i{
+    font-size: .95rem;
+}
+
+.right-contacts-controls-selected{
+    background-color: var(--primary-transparent-color2);
 }
 
 .icon-btn {
@@ -747,8 +793,10 @@ td {
 }
 
 .lbl-model {
-    padding: 3px;
-    background-color: var(--primary-transparent-color2);
+    font-size: 0.8rem;
+    padding: 5px;
+    background-color: var(--gray-2);
+    border: 1px solid var(--gray-t);
     border-radius: 10px;
 }
 

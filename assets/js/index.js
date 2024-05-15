@@ -36,7 +36,13 @@ const chekMenu = document.getElementById("menu-check"),
     contactsNumbersLbl = document.querySelectorAll(".contacts-number-lbl"),
     allContactsBtn = document.getElementById("all-contacts-btn"),
     searchContactsBtn = document.getElementById("btn-search-contacts"),
-    searchContactsInput = document.getElementById("search-contacts-input");
+    searchContactsInput = document.getElementById("search-contacts-input"),
+    labelForm = document.getElementById("label-form"),
+    labelInput = document.getElementById("label-input"),
+    cancelLabelFormBtn = document.getElementById("cancel-label-add-btn"),
+    photoInput = document.getElementById("photo-input"),
+    contactImg = document.getElementById("contact-img"),
+    labelSelector = document.getElementById("label-selector");
 
 
 //Gestion de menu bar avec le checkbox invisible
@@ -71,7 +77,7 @@ backToContactsListBtn.addEventListener(('click'), (event) => {
 
 document.addEventListener("click", (event) => {
     const clickedElement = event.target;
-    const allDropdowns = document.querySelectorAll("#dropdown-check");
+    const allDropdowns = document.querySelectorAll(".dropdown-check");
 
     //fermer tous les dropdowns ouverts si on click à coté
     allDropdowns.forEach(dropdown_ckeck => {

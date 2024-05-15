@@ -58,3 +58,11 @@ function hideModal(id) {
     modal.classList.add("iswa--modal-container-hide");
     modal.classList.remove("iswa--modal-container-show");
 }
+
+//hide all modals
+function hideAllModal(){
+    iswaModalContainers.forEach(iswaModalContainer=>{
+        iswaModalContainer.classList.add("iswa--modal-container-hide");
+        iswaModalContainer.classList.remove("iswa--modal-container-show");
+    });
+}
