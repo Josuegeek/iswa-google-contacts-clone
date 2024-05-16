@@ -30,7 +30,7 @@
         </div>
     </form>
 
-     <!----modal pour la selection des libellés---->
+    <!----modal pour la selection des libellés---->
 
     <!----container principal---->
     <div class="main-container">
@@ -115,7 +115,7 @@
                                 class="fa-solid fa-plus add-icon clickable-background iswa--modal-btn"></i>
                         </div>
                         <div class="libelles-list">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -127,7 +127,8 @@
                 <!----Formulaire des contacts---->
                 <form class="contact-form-container column-block default-gap invisible" action="">
                     <div class="top-controls row-block just-cont-space-between al-it-center">
-                        <i id="back-to-contacts-list-btn" class="fa-solid fa-arrow-left icon-btn clickable-background"></i>
+                        <i id="back-to-contacts-list-btn"
+                            class="fa-solid fa-arrow-left icon-btn clickable-background"></i>
                         <div class="row-block default-gap al-it-center">
                             <i class="fa-regular fa-star icon-btn clickable-background"></i>
                             <button id="submit-btn" class="btn btn-primary" disabled>Enregistrer</button>
@@ -138,28 +139,35 @@
                             <div class="profile-container">
                                 <div id="contact-img" class="contact-img"></div>
                                 <i class="fa-solid fa-plus add-icon choose-img-btn al-center">
-                                    <input type="file" id="photo-input" accept="image/png,image/jpeg,image/jpg,image/webp">
+                                    <input type="file" id="photo-input"
+                                        accept="image/png,image/jpeg,image/jpg,image/webp">
                                 </i>
                             </div>
-                            <div class="dropdown libelle-select">
-                                <button class="btn dropdown-btn small-btn row-block al-it-center default-gap">
-                                    <i class="fa-solid fa-plus add-icon"></i>
-                                    <span>Libellé</span>
-                                </button>
-                                <div class="dropdown-content">
-                                    <div class="libelles-inputs-container">
-                                        <span class="default-padding">Gérer les libellés</span>
-                                        <div id="label-selector"></div>
-                                        <div class="horizontal-separator"></div>
-                                        <div id="add-label-btn" class="add-label-btn">
-                                            <div class="row-block default-gap al-it-center clickable-background">
-                                                <i class="fa-solid fa-plus add-icon"></i>
-                                                <span>Créer un libellé</span>
+                            <div class="row-block default-gap al-it-center  libelle-select">
+                                <div class="row-block default-gap selected-labels">
+
+                                </div>
+                                <div class="dropdown">
+                                    <button id="select-libele-btn" class="btn dropdown-btn small-btn row-block al-it-center default-gap">
+                                        <i class="fa-solid fa-plus add-icon"></i>
+                                        <span>Libellé</span>
+                                    </button>
+                                    <div class="dropdown-content">
+                                        <div class="libelles-inputs-container">
+                                            <span class="default-padding">Gérer les libellés</span>
+                                            <div id="label-selector"></div>
+                                            <div class="horizontal-separator"></div>
+                                            <div id="add-label-btn" class="add-label-btn">
+                                                <div class="row-block default-gap al-it-center clickable-background">
+                                                    <i class="fa-solid fa-plus add-icon"></i>
+                                                    <span>Créer un libellé</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="inputs-section-container">
                                 <div class="inputs-section row-block">
                                     <i class="fa-regular fa-user ic"></i>
@@ -282,7 +290,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                         </tbody>
                     </table>
                 </div>

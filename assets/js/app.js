@@ -1,52 +1,10 @@
-let allContacts = [
-    {
-        contactId: 1,
-        nomComplet: "Iswa Senteri Josué",
-        email: [
-            "iswa@gmail.com",
-            "iswa@tweeter.com"
-        ],
-        phone: "0816332364",
-        fonction: "Dev Kadea",
-        labels: [
-            "Work"
-        ],
-        photo: null
-    },
-    {
-        contactId: 2,
-        nomComplet: "Josue Senteri Wonder",
-        email: [
-            "iswa@gmail.com",
-            "iswa@tweeter.com"
-        ],
-        phone: "0997551099",
-        fonction: "Dev Kadea",
-        labels: [
-            "Bureau"
-        ],
-        photo: null
-    }
-],
+let allContacts = [],
     selectedContacts = [],
-    allLabels = [{
-        name: "Bureau"
-    },
-    {
-        name: "Work"
-    }
-    ];
+    allLabels = [];
 
 let selectedPhoto = null;
-let contactToCreate = {
-    contactId: "",
-    nomComplet: "",
-    email: [],
-    phone: "",
-    fonction: "",
-    labels: [],
-    photo: null
-};
+let selectedLabels = [];
+let contactToEdit = null;
 
 loadAllThings();
 
@@ -61,10 +19,22 @@ function loadAllThings() {
 }
 
 //Charger les lables dans le selecteur des labels dans le formulaire
-function loadLabelsInFrom(){
-    labelSelector.innerHTML="";
-    let labelsList = createLabelsForLabelsSelector();
+function loadLabelsInFrom() {
+    labelSelector.innerHTML = "";
+    selectedLabelsContainer.innerHTML="";
+    const labelsList = createLabelsForLabelsSelector();
+    const hLabelsList = createContactsLabels(selectedLabels);
+    if(!(selectedLabels.length>0)){
+        selectLabelBtn.innerHTML=`
+        <i class="fa-solid fa-plus add-icon"></i>
+        <span>Libellé</span>`;
+    }
+    else{
+        selectLabelBtn.innerHTML=`
+            <i class="fa-solid fa-pen add-icon"></i>`
+    }
     labelSelector.appendChild(labelsList);
+    selectedLabelsContainer.appendChild(hLabelsList);
 }
 
 //actualiser le nombre des contacts affiché
@@ -80,6 +50,7 @@ allContactsBtn.addEventListener("click", () => {
         element.classList.remove("selected-btn-secondary");
     });
     allContactsBtn.classList.add("selected-btn-secondary");
+    hideForm();
     showContacts();
 });
 
@@ -88,6 +59,10 @@ searchContactsBtn.addEventListener("click", () => {
     if (searchContactsInput.value != "") {
         let contactsFilteredByWord = findContacts(null, null, searchContactsInput.value.toLowerCase());
         showFilterContacts(contactsFilteredByWord);
+        document.querySelectorAll(".selected-btn-secondary").forEach(element => {
+            element.classList.remove("selected-btn-secondary");
+        });
+        allContactsBtn.classList.add("selected-btn-secondary");
     }
 
 });
@@ -97,6 +72,7 @@ labelForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const label = { name: labelInput.value }
     addLabel(label);
+    labelForm.reset();
     hideAllModal();
     loadAllThings();
 });
@@ -114,11 +90,60 @@ photoInput.addEventListener('change', function (event) {
         reader.onload = function (event) {
             const blob = event.target.result;
             selectedPhoto = blob;
-            contactImg.style.backgroundImage = `url(${blob})`;
-            contactImg.style.backgroundSize = 'cover';
-            contactImg.style.backgroundPosition = 'center';
+
+            showContactProfile(blob);
         };
         reader.readAsDataURL(file);
+    }
+});
+
+//afficher la photo blob dans le profil du contact
+function showContactProfile(blob) {
+    contactImg.style.backgroundImage = `url(${blob})`;
+    contactImg.style.backgroundSize = 'cover';
+    contactImg.style.backgroundPosition = 'center';
+}
+
+//listenner à la soumission du formulaire des contacts
+contactFormContainer.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if ((nomInput.value.trim().length !== 0 || prenomInput.value.trim().length !== 0)
+        && phoneInput.value.trim().length !== 0) {
+
+        //création d'un array des emails
+        const allEmailInputs = emailsContainer.querySelectorAll("input");
+        let emailsArray = [];
+        allEmailInputs.forEach(emailInput => {
+            if (emailInput.value.trim().length > 0) {
+                emailsArray.push(emailInput.value)
+            }
+        });
+
+        const contact = {
+            contactId: crypto.randomUUID(),
+            nom: nomInput.value, prenom: prenomInput.value, deuxiemePrenom: deuxiemePrenomInput.value,
+            nomPhonetique: nomPhonetiqueInput.value, prenomPhonetique: prenomPhonetiqueInput.value,
+            DeuxiemePrenomPhonetique: deuxiemePrenomPhonetiqueInput.value,
+            prefixe: prefixeInput.value, suffixe: suffixeInput.value, pseudo: pseudoInput.value,
+            enTantQue: enTantQueInput.value,
+            emails: emailsArray,
+            entreprise: entrepriseInput.value, fonction: fonctionInput.value, service: serviceInput.value,
+            phone: phoneInput.value,
+            fonction: fonctionInput.value,
+            labels: selectedLabels,
+            photo: selectedPhoto
+        };
+
+        if (submitBtn.textContent.toLocaleLowerCase().includes("enregistrer")) {
+            addNewContact(contact);
+        }
+        else {
+            editContact(contactToEdit, contact);
+        }
+    }
+    else {
+        iswaAlert("Merci de saisir les bonnes valeurs", "", "error");
     }
 });
 
@@ -135,6 +160,7 @@ function showLabels() {
                     element.classList.remove("selected-btn-secondary");
                 });
                 libelleView.classList.add("selected-btn-secondary");
+                hideForm();
             }
         });
 
@@ -160,55 +186,59 @@ function getLabelsContactNumber() {
     });
 }
 
+//ajouter un contact dans la table html
+function addContactToTable(contact) {
+    let tr = createElement("tr", {
+        classList: "row-style"
+    });
+    let titleElement = createElement("div", {
+        classList: "row-block default-gap al-it-center"
+    });
+    const contactProfile = createElement("span", {
+        classList: (contact.photo != null) ? "contact-profile" : "contact-profile contact-profile-default",
+        textContent: (contact.photo == null) ? `${(contact.prenom + " " + contact.nom).trim()[0].toUpperCase()}` : ''
+    });
+
+    contactProfile.style.backgroundImage = `url(${contact.photo})`;
+    const contactName = createElement("span", {
+        textContent: `${(contact.prenom + " " + contact.nom)}`
+    })
+
+    titleElement.append(contactProfile, contactName);
+
+    let tdTitle = createElement("td", {});
+
+    let contactControls = createContactControls(contact.contactId);
+
+    tdTitle.append(contactControls, titleElement);
+
+    const tdEmail = createElement("td", {
+        textContent: contact.emails
+    });
+    const tdPhone = createElement("td", {
+        textContent: contact.phone
+    });
+    const tdFonction = createElement("td", {
+        textContent: contact.entreprise + " " + contact.service + " " + contact.fonction
+    });
+    const tdLabels = createElement("td", {
+        classList: "td-label"
+    });
+    const labels = createContactsLabels(contact.labels);
+    tdLabels.appendChild(labels);
+
+    tr.append(tdTitle, tdEmail, tdPhone, tdFonction, tdLabels);
+    contactsTbody.appendChild(tr);
+    initIswaDropdowns();
+}
+
 //afficher tous les contacts
 function showContacts() {
 
     contactsTbody.innerHTML = "";
 
     allContacts.forEach(contact => {
-        let tr = createElement("tr", {
-            classList: "row-style"
-        });
-        let titleElement = createElement("div", {
-            classList: "row-block default-gap al-it-center"
-        });
-        const contactProfile = createElement("span", {
-            classList: "contact-profile",
-            style: {
-                backgroundImage: (contact.photo != null) ? `url(${contact.photo})` : ""
-            },
-            textContent: (contact.photo == null) ? `${contact.nomComplet[0].toUpperCase()}` : ''
-        });
-        const contactName = createElement("span", {
-            textContent: `${contact.nomComplet}`
-        })
-
-        titleElement.append(contactProfile, contactName);
-
-        let tdTitle = createElement("td", {});
-
-        let contactControls = createContactControls(contact.contactId);
-
-        tdTitle.append(contactControls, titleElement);
-
-        const tdEmail = createElement("td", {
-            textContent: contact.email
-        });
-        const tdPhone = createElement("td", {
-            textContent: contact.phone
-        });
-        const tdFonction = createElement("td", {
-            textContent: contact.fonction
-        });
-        const tdLabels = createElement("td", {
-            classList: "td-label"
-        });
-        const labels = createContactsLabels(contact.labels);
-        tdLabels.appendChild(labels);
-
-        tr.append(tdTitle, tdEmail, tdPhone, tdFonction, tdLabels);
-        contactsTbody.appendChild(tr);
-
+        addContactToTable(contact)
     });
 }
 
@@ -217,47 +247,7 @@ function showFilterContacts(contacts) {
     contactsTbody.innerHTML = "";
 
     contacts.forEach(contact => {
-        let tr = createElement("tr", {});
-        let titleElement = createElement("div", {
-            classList: "row-block default-gap al-it-center"
-        });
-        const contactProfile = createElement("span", {
-            classList: "contact-profile",
-            style: {
-                backgroundImage: (contact.photo != null) ? `url(${contact.photo})` : ""
-            },
-            textContent: (contact.photo == null) ? `${contact.nomComplet[0].toUpperCase()}` : ''
-        });
-        const contactName = createElement("span", {
-            textContent: `${contact.nomComplet}`
-        })
-
-        titleElement.append(contactProfile, contactName);
-
-        let tdTitle = createElement("td", {});
-
-        let contactControls = createContactControls(contact.contactId);
-
-        tdTitle.append(contactControls, titleElement);
-
-        const tdEmail = createElement("td", {
-            textContent: contact.email
-        });
-        const tdPhone = createElement("td", {
-            textContent: contact.phone
-        });
-        const tdFonction = createElement("td", {
-            textContent: contact.fonction
-        });
-        const tdLabels = createElement("td", {
-            classList: "td-label"
-        });
-        const labels = createContactsLabels(contact.labels);
-        tdLabels.appendChild(labels);
-
-        tr.append(tdTitle, tdEmail, tdPhone, tdFonction, tdLabels);
-        contactsTbody.appendChild(tr);
-
+        addContactToTable(contact)
     });
 }
 
@@ -339,7 +329,7 @@ function createContactControls(contactId) {
 //Créer la div des labels
 function createContactsLabels(labels) {
     const labelContainer = createElement("div", {
-        classList: "row-block default-gap al-it-center height-100 width-100"
+        classList: "row-block default-gap al-it-center"
     });
 
     labels.forEach(label => {
@@ -385,7 +375,7 @@ function createContactLabel(contactId) {
 
 //créer la liste des labels à ajouter dans le selecteur des labels
 function createLabelsForLabelsSelector() {
-    let labelsContainer=createElement("div", {});
+    let labelsContainer = createElement("div", {});
     allLabels.forEach(label => {
         let labelView = createElement("div", {
             classList: "row-block default-gap default-padding al-it-center just-cont-space-between clickable-background",
@@ -399,7 +389,7 @@ function createLabelsForLabelsSelector() {
                 <i class="fa-solid fa-ticket"></i>
                 <span>${label.name}</span>
             </div>
-            ${(contactToCreate.labels.find(l => l == label.name)) ? '<i class="fa-solid fa-check c-green"></i>' : ''}
+            ${(selectedLabels.find(l => l == label.name)) ? '<i class="fa-solid fa-check c-green"></i>' : ''}
         `;
 
         labelsContainer.appendChild(labelView);
@@ -409,14 +399,47 @@ function createLabelsForLabelsSelector() {
 
 //afficher le formulaire pour éditer un contact
 function showEditContactForm(contactId) {
+    const contact = allContacts.find(c => c.contactId == contactId);
 
+    if (contact) {
+        contactToEdit = contact;
+        selectedLabels = contact.labels;
+        selectedPhoto = contact.photo;
+        if (selectedPhoto != null) showContactProfile(contact.photo);
+        loadLabelsInFrom();
+
+        nomInput.value = contact.nom; prenomInput.value = contact.prenom; prenomPhonetiqueInput.value = contact.prenomPhonetique;
+        nomPhonetiqueInput.value = contact.nomPhonetique; deuxiemePrenomInput.value = contact.deuxiemePrenom;
+        deuxiemePrenomPhonetiqueInput.value = contact.DeuxiemePrenomPhonetique; suffixeInput.value = contact.suffixe;
+        prefixeInput.value = contact.prefixe; enTantQueInput.value = contact.enTantQue;
+
+        entrepriseInput.value = contact.entreprise; serviceInput.value = contact.service; fonctionInput.value = contact.fonction;
+
+        phoneInput.value = contact.phone;
+
+        emailsContainer.innerHTML = "";
+        contact.emails.forEach(email => {
+            let emailInput = createEmailInput(crypto.randomUUID());
+            emailInput.querySelector("input").value = email;
+            addEmailInput(emailInput);
+        });
+        submitBtn.textContent = "Modifier";
+        showForm();
+    }
+    else {
+        console.log("contact non trouvé", contactId, allContacts, contact)
+    }
 }
 
 //ajouter un contact
-function addNewContact() {
-    const contact = {
-
-    }
+function addNewContact(contact) {
+    allContacts.push(contact);
+    contactFormContainer.reset();
+    contactImg.style.backgroundImage = `url("../../imgs/user_sample.png")`;
+    submitBtn.disabled = true;
+    contactFormContainer.querySelector(".container").scrollTop = 0;
+    iswaAlert("Contact enregistré", "", "success");
+    loadAllThings();
 }
 
 //Supprimer un contact
@@ -429,13 +452,32 @@ function deleteContact(contactId) {
 }
 
 //Modifier un contacts
-function editContact(oldContactId, newContact) {
-
+function editContact(oldContact, newContact) {
+    try {
+        if (oldContact && newContact) {
+            let contactSource = allContacts.find(c => c.contactId = oldContact.contactId);
+            for (const p in oldContact) {
+                if (p !== "contactId") {
+                    contactSource[`${p}`] = newContact[`${p}`];
+                }
+            }
+            iswaAlert("modification réussie", "", "success");
+            loadAllThings();
+        }
+    }
+    catch (exception) {
+        iswaAlert("Erreur pendant la modification : " + exception, "", "error");
+    }
 }
 
 //Ajouter un libellé
 function addLabel(label) {
-    allLabels.push(label);
+    if (!(allLabels.find(l => l.name.toLocaleLowerCase() == label.name.toLocaleLowerCase()))) {
+        allLabels.push(label);
+    }
+    else {
+        iswaAlert("Ce libellé existe déjà", "", "error");
+    }
 }
 
 //ajouter le label au contact
@@ -450,18 +492,19 @@ function addLabelToContact(contactId, label) {
             }
             else {
                 if (confirm("Enlever ce label du contact?")) {
-                    contact.labels.splice(label, 1);
+                    const index = contact.labels.indexOf(label)
+                    contact.labels.splice(index, 1);
                     loadAllThings();
                 }
             }
         }
     }
     else {
-        if(!contactToCreate.labels.find(c => c == label)){
-            contactToCreate.labels.push(label);
+        if (!selectedLabels.find(c => c == label)) {
+            selectedLabels.push(label);
         }
-        else{
-            contactToCreate.labels.splice(label,1);
+        else {
+            selectedLabels.splice(label, 1);
         }
         loadLabelsInFrom();
     }
@@ -475,8 +518,10 @@ function findContacts(attribut, value, word) {
         filteredContacts = allContacts.filter(contact =>
             contact.contactId == word || contact.fonction.toLowerCase().includes(word)
             || contact.labels.indexOf(label => label.toLowerCase().includes(word)) >= 0
-            || contact.phone.includes(word) || contact.nomComplet.toLowerCase().includes(word)
-            || contact.email.findIndex(email => email.toLowerCase().includes(word)) >= 0
+            || contact.phone.includes(word) || contact.nom.toLowerCase().includes(word)
+            || contact.prenom.toLowerCase().includes(word) || contact.entreprise.toLowerCase().includes(word)
+            || contact.service.toLowerCase().includes(word) || contact.fonction.toLowerCase().includes(word)
+            || contact.emails.findIndex(emails => emails.toLowerCase().includes(word)) >= 0
         )
     }
     else {

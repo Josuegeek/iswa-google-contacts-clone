@@ -5,6 +5,7 @@ function initIswaDropdowns(){
     allDropdowns.forEach(dropdown => {
         const checkInput = document.createElement('input');
         checkInput.className = 'dropdown-check'; checkInput.type='checkbox';
-        dropdown.prepend(checkInput);
+        if(!dropdown.querySelector(".dropdown-check"))
+            dropdown.prepend(checkInput);
     });
 }

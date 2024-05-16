@@ -1,26 +1,47 @@
 //fonction pour le confirm
-function iswaConfirm(msg, showTitle, title){
+function iswaAlert(msg,title="", icon="info"){
     msg=(msg=="")? "Effectuer l'action ?" : msg;
     
-    var confirmContainer = createAnElement("div",{
+    let confirmContainer = createAnElement("div",{
         className:"iswa--confirm-container",
+        onclick:()=>{
+            confirmContainer.remove();
+        }
     });
-    var confirm = createAnElement("div",{
+    let confirm = createAnElement("div",{
         className:"iswa--confirm",
     });
 
+    let classListForIcon = "";
+    switch(icon){
+        case "info":
+            classListForIcon = "fa-solid fa-circle-info iswa--confirm-icon";
+            break;
+        case "success":
+            classListForIcon = "fa-regular fa-thumbs-up iswa--confirm-icon iswa--confirm-secondary"
+            break;
+        case "error":
+            classListForIcon = "fa-solid fa-triangle-exclamation iswa--confirm-icon iswa--confirm-error-c";
+            break;
+        default :
+            classListForIcon = "fa-solid fa-circle-info iswa--confirm-icon";
+    }
+
+    const iconView = createAnElement("i",{classList : classListForIcon});
+
+    const btnsContainer = createAnElement("div", {classList:"iswa--confirm-btn-container"});
+
     confirm.innerHTML = `
-        ${(showTitle)? '<span class="iswa--confirm-title">'+title+'</span>':""}
-        <div class="iswa--confirm-separator"></div>
-        <span class="iswa--confirm-msg">${(msg!=="")? msg : "Effectuer cette action"} ?</span>
-        <div class="iswa--confirm-btn-container"></div>
+        ${(title!="")? '<span class="iswa--confirm-title">'+title+'</span>':""}
+        ${(title!="")?'<div class="iswa--confirm-separator"></div>':''}
+        <span class="iswa--confirm-msg">${(msg!=="")? msg : "Message de ISWA"}</span>
     `;
 
-    var btnsContainer = confirm.querySelector(".iswa--confirm-btn-container");
+    confirm.append(iconView, btnsContainer)
 
     const acceptBtn= createAnElement("div", {
-        textContent:"Confirmer",
-        className:"iswa--confirm-btn iswa--confirm-primary",
+        textContent:"OK",
+        classList:"iswa--confirm-btn iswa--confirm-primary",
         onclick:()=>{
             confirmContainer.remove();
             return true;
@@ -29,14 +50,14 @@ function iswaConfirm(msg, showTitle, title){
 
     const cancelBtn= createAnElement("div", {
         textContent:"Annuler",
-        className:"iswa--confirm-btn iswa--confirm-secondary",
+        classList:"iswa--confirm-btn iswa--confirm-secondary",
         onclick:()=>{
             confirmContainer.remove();
             return false;
         }
     });
 
-    btnsContainer.append(cancelBtn, acceptBtn);
+    btnsContainer.append(acceptBtn);
 
     confirmContainer.appendChild(confirm);
     document.body.prepend(confirmContainer);

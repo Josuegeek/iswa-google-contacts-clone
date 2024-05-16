@@ -11,11 +11,12 @@ const chekMenu = document.getElementById("menu-check"),
     deuxiemePrenomInput = document.getElementById("deuxieme-prenom"),
     prenomPhonetiqueInput = document.getElementById("prenom-phonetique"),
     deuxiemePrenomPhonetiqueInput = document.getElementById("deuxieme-prenom-ponetique"),
-    dnomPhonetiqueInput = document.getElementById("nom-phonetique"),
+    nomPhonetiqueInput = document.getElementById("nom-phonetique"),
     pseudoInput = document.getElementById("pseudo"),
     enTantQueInput = document.getElementById("en-tant-que"),
     entrepriseInput = document.getElementById("entreprise"),
     fonctionInput = document.getElementById("fonction"),
+    serviceInput = document.getElementById("service"),
     emailInput = document.getElementById("email"),
     phoneInput = document.getElementById("phone"),
     allInputs = document.querySelectorAll(".input-container .input"),
@@ -32,7 +33,7 @@ const chekMenu = document.getElementById("menu-check"),
     backToContactsListBtn = document.getElementById("back-to-contacts-list-btn"),
     addNewContactbtn = document.querySelectorAll('#create-contact-btn'),
     libellesList = document.querySelector(".libelles-list"),
-    contactsTbody = document.querySelector("tbody"), 
+    contactsTbody = document.querySelector("tbody"),
     contactsNumbersLbl = document.querySelectorAll(".contacts-number-lbl"),
     allContactsBtn = document.getElementById("all-contacts-btn"),
     searchContactsBtn = document.getElementById("btn-search-contacts"),
@@ -42,7 +43,9 @@ const chekMenu = document.getElementById("menu-check"),
     cancelLabelFormBtn = document.getElementById("cancel-label-add-btn"),
     photoInput = document.getElementById("photo-input"),
     contactImg = document.getElementById("contact-img"),
-    labelSelector = document.getElementById("label-selector");
+    labelSelector = document.getElementById("label-selector"),
+    selectedLabelsContainer = document.querySelector(".selected-labels"),
+    selectLabelBtn = document.querySelector("#select-libele-btn");
 
 
 //Gestion de menu bar avec le checkbox invisible
@@ -63,7 +66,7 @@ chekMenu.addEventListener('change', (event) => {
     }
 });
 
-//bouton de création d'un nouvel contact(Formulaire)
+//bouton d'affichage du formulaire contact(Formulaire)
 addNewContactbtn.forEach(btn => {
     btn.addEventListener("click", (event) => {
         showForm();
@@ -100,25 +103,41 @@ addLabelBtn.forEach(btn => {
 //Ajout du style dynamique des labels quand input est changé
 function setInputsEventListenner() {
     allInputs.forEach(input => {
-        input.addEventListener("focus", (event) => {
+        setInputListenners(input);
+    });
+}
+
+//fonction pour ajouter les listenners dans un input
+function setInputListenners(input) {
+    input.addEventListener("focus", (event) => {
+        let label = input.parentElement.querySelector("label");
+        if (label == null) {
+            label = input.parentElement.parentElement.querySelector("label");
+        }
+        label.classList.add('label-focused');
+    });
+    input.addEventListener("focusout", (event) => {
+        if (input.value === "") {
             let label = input.parentElement.querySelector("label");
             if (label == null) {
                 label = input.parentElement.parentElement.querySelector("label");
             }
-            label.classList.add('label-focused')
-        });
-        input.addEventListener("focusout", (event) => {
-            if (input.value === "") {
-                let label = input.parentElement.querySelector("label");
-                if (label == null) {
-                    label = input.parentElement.parentElement.querySelector("label");
-                }
-                label.classList.remove('label-focused');
+            label.classList.remove('label-focused');
+        }
+    });
+    input.addEventListener("input", (event) => {
+        switchBtnStateByInputsValues();
+    });
+    input.addEventListener("change", (event) => {
+        if (input.value === "") {
+            let label = input.parentElement.querySelector("label");
+            if (label == null) {
+                label = input.parentElement.parentElement.querySelector("label");
             }
-        });
-        input.addEventListener("input", (event) => {
-            switchBtnStateByInputsValues();
-        });
+            if (input.value != "")
+                label.classList.add('label-focused');
+            else label.classList.remove('label-focused');
+        }
     });
 }
 
@@ -158,11 +177,11 @@ if (namesDisplaySwitchbtn) {
     });
 
     //ajout d'un input E-mail initial
-    addEmailInput(crypto.randomUUID());
+    addEmailInput(createEmailInput(crypto.randomUUID()));
 
     //ajouter un input pour E-mail
     addEmailInputBtn.addEventListener("click", () => {
-        addEmailInput(crypto.randomUUID());
+        addEmailInput(createEmailInput(crypto.randomUUID()));
     });
 }
 
@@ -207,7 +226,14 @@ function createElement(type, properties = {}) {
 }
 
 //fonction pour ajouter un emailInput
-function addEmailInput(id) {
+function addEmailInput(iEmailContainer) {
+    const input = iEmailContainer.querySelector("input");
+    setInputListenners(input);
+    emailsContainer.appendChild(iEmailContainer);
+}
+
+//Créer un élément email input
+function createEmailInput(id) {
     const iEmailContainer = createElement("div", { className: "input-container row-block al-it-center" });
     const iLabelForEmail = createElement("label", { for: `${id}`, textContent: "E-mail", className: "label" });
     const iInputEmail = createElement("input", {
@@ -227,14 +253,15 @@ function addEmailInput(id) {
     })
 
     const iIconDeleteEmail = createElement("i", {
-        className: "hide fa-solid fa-close icon-btn clickable-background"
+        className: "hide fa-solid fa-close icon-btn clickable-background",
+        onclick: () => {
+            deleteElement(iEmailContainer);
+        }
     });
 
     iEmailContainer.append(iLabelForEmail, iInputEmail, iIconDeleteEmail);
-    emailsContainer.appendChild(iEmailContainer);
-    iIconDeleteEmail.addEventListener('click', () => {
-        deleteElement(iEmailContainer);
-    });
+
+    return iEmailContainer;
 }
 
 //switch des etats du bouton enregistrer du formulaire
@@ -250,10 +277,12 @@ function switchBtnStateByInputsValues() {
 //afficher le formulaire de contact
 function showForm() {
     if (contactFormContainer.classList.contains("invisible")) {
+        submitBtn.disabled = true
         contactFormContainer.classList.remove("invisible");
         contactFormContainer.classList.remove("hide-form-contact");
         contactFormContainer.classList.add("show-form-contact");
         contactsContainer.classList.add('invisible');
+        loadAllThings();
     }
 }
 
@@ -264,9 +293,22 @@ function hideForm() {
         contactFormContainer.classList.remove("show-form-contact");
         contactFormContainer.classList.add("hide-form-contact");
         contactsContainer.classList.remove('invisible');
+
+        selectedLabels = [];
+        selectedPhoto = null;
+        contactToEdit = null;
+        contactFormContainer.reset();
+        submitBtn.textContent = "Enregistrer"
+        submitBtn.disabled = true
     }
     else {
-        if (confirm("Annuler l'enregistrement ?")) {
+        if (confirm("Annuler l'opération ?")) {
+            selectedLabels = [];
+            selectedPhoto = null;
+            contactToEdit = null;
+            contactFormContainer.reset();
+            submitBtn.textContent = "Enregistrer";
+            submitBtn.disabled = true;
             contactFormContainer.classList.add("invisible");
             contactFormContainer.classList.remove("show-form-contact");
             contactFormContainer.classList.add("hide-form-contact");

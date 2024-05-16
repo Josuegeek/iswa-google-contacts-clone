@@ -11,6 +11,7 @@
 .iswa--confirm-container {
     display: flex;
     position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     justify-content: center;
@@ -43,6 +44,8 @@
 .iswa--confirm-msg{
     padding: 10px;
     text-align: center;
+    margin-top: 10px;
+    font-size: 1rem;
 }
 
 .iswa--confirm-separator {
@@ -56,6 +59,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 20px;
+    min-width: 80px;
     padding: 10px;
     border: none;
     transition: all ease-in-out 0.3s;
@@ -67,7 +71,7 @@
     display: flex;
     gap: 5px;
     padding: 10px;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .iswa--confirm-btn:hover{
@@ -81,4 +85,25 @@
 
 .iswa--confirm-secondary {
     color: #0957d0;
+}
+
+.iswa--confirm-icon{
+    text-align: center;
+    font-size: 35px;
+}
+
+.iswa--confirm-success-bg{
+    background-color: rgba(0, 128, 0, 0.692);
+}
+
+.iswa--confirm-error-bg{
+    background-color: rgba(185, 5, 5, 0.699);
+}
+
+.iswa--confirm-success-c{
+    color: rgba(0, 128, 0, 0.692);
+}
+
+.iswa--confirm-error-c{
+    color: rgba(185, 5, 5, 0.699);
 }
