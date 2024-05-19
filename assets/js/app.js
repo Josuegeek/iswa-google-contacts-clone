@@ -41,7 +41,15 @@ function loadLabelsInFrom() {
 function showContactsNumber() {
     contactsNumbersLbl.forEach(contactsNumber => {
         contactsNumber.textContent = `(${allContacts.length})`;
-    })
+    });
+    if(allContacts.length<=0){
+        contacts_table.classList.add("invisible");
+        welcomeContainer.classList.remove("invisible");
+    }
+    else{
+        contacts_table.classList.remove("invisible");
+        welcomeContainer.classList.add("invisible");
+    }
 }
 
 //actualiser les contacts affiché quand on click sur le bouton de tous les contacts

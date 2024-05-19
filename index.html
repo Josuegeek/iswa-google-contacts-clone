@@ -37,11 +37,11 @@
 
         <!----Bouton flottant---->
         <div class="dropdown float-btn-container">
-            <button id="float-btn" class="btn float-btn btn-secondary row-block al-it-center default-gap invisible">
+            <button id="float-btn" class="btn float-btn btn-secondary row-block al-it-center default-gap">
                 <i class="fa-solid fa-plus add-icon"></i>
             </button>
-            <div class="dropdown-content">
-                <button id="create-contact-btn" class="row-block default-gap clickable-background default-margin">
+            <div class="dropdown-content dropdown-content-t-right">
+                <button id="create-contact-btn" class="row-block default-gap clickable-background default-margin btn btn-secondary3">
                     <i class="fa-regular fa-user"></i>
                     <span>Créer un contact</span>
                 </button>
@@ -77,6 +77,10 @@
 
             <!----Menu de navigation gauche---->
             <div class="left-navigation">
+                <a class="logo-link row-block al-it-center default-margin invisible" href="#">
+                    <img class="logo-img" src="./imgs/contats-icon.png" alt="logo image">
+                    <span>Contacts</span>
+                </a>
                 <div class="add-contact-btn-container">
                     <div class="dropdown">
                         <button class="btn btn-secondary row-block al-it-center default-gap">
@@ -293,6 +297,19 @@
 
                         </tbody>
                     </table>
+                </div>
+
+                <!----Page de bienvenue---->
+                <div class="welcome-container column-block default-gap al-it-center">
+                    <div class="column-block default-gap al-it-center default-margin">
+                        <img src="./imgs/emptycontacts_animation_cell4.png" alt="image de bienvenue" class="img-welcome">
+                        <span>Pas de contacts pour le moment</span>
+                    </div>
+
+                    <button id="create-contact-btn" class="btn btn-secondary3 row-block default-gap just-cont-center al-it-center">
+                        <i class="fa-regular fa-user"></i>
+                        <span>Créer un nouveau contact</span>
+                    </button>
                 </div>
 
             </div>

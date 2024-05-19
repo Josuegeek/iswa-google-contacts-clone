@@ -45,25 +45,66 @@ const chekMenu = document.getElementById("menu-check"),
     contactImg = document.getElementById("contact-img"),
     labelSelector = document.getElementById("label-selector"),
     selectedLabelsContainer = document.querySelector(".selected-labels"),
-    selectLabelBtn = document.querySelector("#select-libele-btn");
+    selectLabelBtn = document.querySelector("#select-libele-btn"),
+    welcomeContainer = document.querySelector(".welcome-container"),
+    createNewContactBtn = document.getElementById("btn-create-contact");
 
+initMenuState();
 
-//Gestion de menu bar avec le checkbox invisible
-chekMenu.addEventListener('change', (event) => {
-    if (event.target.checked) {
+//init menu state
+function initMenuState() {
+    const windowWidth = window.innerWidth;
+    if (windowWidth <= 1024) {
+        chekMenu.checked = true;
         menuBarsIcon.classList.remove("fa-bars-staggered");
         menuBarsIcon.classList.add("fa-bars");
         leftNavigation.classList.add("left-navigation-hidden");
         mainFrame.classList.add("main-frame-fill-side");
-        floatBtn.classList.remove("hide");
+        if (contactFormContainer.classList.contains("invisible")) 
+            floatBtn.classList.remove("invisible");
+    }
+    else{
+        chekMenu.checked = false;
+        menuBarsIcon.classList.remove("fa-bars");
+        menuBarsIcon.classList.add("fa-bars-staggered");
+        leftNavigation.classList.remove("left-navigation-hidden");
+        mainFrame.classList.remove("main-frame-fill-side");
+        floatBtn.classList.add("invisible");
+    }
+}
+
+//fonction pour afficher le menu
+function menuSwitchState() {
+    const windowWidth = window.innerWidth;
+
+    if (chekMenu.checked) {
+        menuBarsIcon.classList.remove("fa-bars-staggered");
+        menuBarsIcon.classList.add("fa-bars");
+        leftNavigation.classList.add("left-navigation-hidden");
+        mainFrame.classList.add("main-frame-fill-side");
+        if (contactFormContainer.classList.contains("invisible")) 
+            floatBtn.classList.remove("invisible");
     }
     else {
         menuBarsIcon.classList.remove("fa-bars");
         menuBarsIcon.classList.add("fa-bars-staggered");
         leftNavigation.classList.remove("left-navigation-hidden");
-        mainFrame.classList.remove("main-frame-fill-side");
-        floatBtn.classList.add("hide");
+        if (windowWidth > 1024)
+            mainFrame.classList.remove("main-frame-fill-side");
+        floatBtn.classList.add("invisible");
     }
+
+}
+
+//Gestion de menu bar avec le checkbox invisible
+chekMenu.addEventListener('change', (event) => {
+    menuSwitchState()
+});
+
+//Changer l'affiche de menu et autres choses au changement de la taille
+//de la fenetre
+window.addEventListener("resize", (event) => {
+    initMenuState();
 });
 
 //bouton d'affichage du formulaire contact(Formulaire)
@@ -88,6 +129,15 @@ document.addEventListener("click", (event) => {
             dropdown_ckeck.checked = false;
         }
     });
+
+    if (clickedElement !== leftNavigation && clickedElement !== chekMenu && clickedElement !== document.querySelector(".left-navigation .dropdown .dropdown-check")) {
+        const windowWidth = window.innerWidth;
+        if (windowWidth <= 1024) {
+            chekMenu.checked = true;
+            menuSwitchState();
+        }
+
+    }
 });
 
 //initialisation de l'input pour le téléphone
@@ -96,7 +146,7 @@ window.intlTelInput(phoneInput, {});
 //ajout des ecouteurs pour les boutons add label
 addLabelBtn.forEach(btn => {
     btn.addEventListener("click", (event) => {
-        showModal(1);
+        showIswaModal(1);
     });
 });
 
@@ -129,15 +179,12 @@ function setInputListenners(input) {
         switchBtnStateByInputsValues();
     });
     input.addEventListener("change", (event) => {
-        if (input.value === "") {
-            let label = input.parentElement.querySelector("label");
-            if (label == null) {
-                label = input.parentElement.parentElement.querySelector("label");
-            }
-            if (input.value != "")
-                label.classList.add('label-focused');
-            else label.classList.remove('label-focused');
+        let label = input.parentElement.querySelector("label");
+        if (label == null) {
+            label = input.parentElement.parentElement.querySelector("label");
         }
+        if (input.value != "") label.classList.add('label-focused');
+        else label.classList.remove('label-focused');
     });
 }
 
@@ -282,6 +329,8 @@ function showForm() {
         contactFormContainer.classList.remove("hide-form-contact");
         contactFormContainer.classList.add("show-form-contact");
         contactsContainer.classList.add('invisible');
+        floatBtn.classList.add("invisible");
+        welcomeContainer.classList.add("invisible");
         loadAllThings();
     }
 }
@@ -300,6 +349,7 @@ function hideForm() {
         contactFormContainer.reset();
         submitBtn.textContent = "Enregistrer"
         submitBtn.disabled = true
+        floatBtn.classList.remove("invisible");
     }
     else {
         if (confirm("Annuler l'opération ?")) {
@@ -313,6 +363,7 @@ function hideForm() {
             contactFormContainer.classList.remove("show-form-contact");
             contactFormContainer.classList.add("hide-form-contact");
             contactsContainer.classList.remove('invisible');
+            floatBtn.classList.remove("invisible");
         }
     }
 

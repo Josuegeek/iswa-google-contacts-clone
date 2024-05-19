@@ -279,7 +279,7 @@ small {
 
 .logo-link {
     color: var(--black2);
-    font-size: 1.4375;
+    font-size: 1.4375rem;
     font-weight: 100;
     gap: 10px;
 }
@@ -848,4 +848,42 @@ td {
 
 .show-form-contact{
     animation: fromRightToCenter .3s alternate 0s;
+}
+
+.welcome-container img{
+    width: 250px;
+}
+
+.welcome-container button{
+    width: fit-content;
+}
+
+/*Responsivité*/
+@media (max-width: 1024px) {
+    .left-navigation-hidden{
+        left: -100%;
+        transition: all ease-in-out .3s;
+    }
+    .left-navigation{
+        z-index: 20;
+        transition: all ease-in-out .3s;
+        height: 100%;
+        position: absolute;
+        background-color: var(--background-color);
+        top: 0;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 2px 40px 0px, rgba(60, 64, 67, 0.15) 0px 2px 5px 1px;
+    } 
+    .left-navigation .logo-link{
+        display: flex;
+    }
+}
+
+@media (max-width: 768px) {
+    .topbar a span{
+        display: none;
+    }
+
+    .search-container{
+        margin-left: 5px;
+    }
 }

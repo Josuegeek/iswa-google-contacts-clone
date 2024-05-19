@@ -36,7 +36,7 @@ function addBtnShowModalsListenners() {
         var i = 0;
         btnsShowModals.forEach(btnShowModal => {
             btnShowModal.addEventListener("click", (event) => {
-                showModal(i);
+                showIswaModal(i);
             });
             i++;
         });
@@ -44,7 +44,7 @@ function addBtnShowModalsListenners() {
 }
 
 //show modal
-function showModal(index) {
+function showIswaModal(index) {
     if (Number(index)) {
         iswaModalContainers[index-1].classList.remove("iswa--modal-container-hide");
         iswaModalContainers[index-1].classList.add("iswa--modal-container-show");
