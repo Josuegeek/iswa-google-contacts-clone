@@ -16,6 +16,35 @@
     --secondary-color: #f1f3f4;
 }
 
+
+#animateBulle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    z-index: 0;
+}
+
+.bulle {
+    position: absolute; 
+    width: 30px;
+    height: 30px; 
+    border-radius: 50%;
+    background-color: var(--primary-transparent-color2);
+    animation: bouger 5s alternate infinite;
+}
+
+@keyframes bouger {
+    0% {
+        top: 0;
+        left: 0;
+    }
+    50% {
+        top: 50%;
+        left: 50%;
+    }
+}
+
 @keyframes fromRightToCenter {
     from {
         transform: translateX(1000px);
@@ -56,6 +85,9 @@ i {
 
 a {
     text-decoration: none;
+}
+ul{
+    margin: 0;
 }
 
 small {
@@ -147,6 +179,10 @@ small {
 
 .default-mg-top {
     margin-top: 15px;
+}
+
+.default-mg-bottom {
+    margin-bottom: 15px;
 }
 
 .width-1OO{
@@ -349,11 +385,16 @@ input:focus {
 }
 
 .btn {
+    width: fit-content;
     cursor: pointer;
     padding: 10px;
     border-radius: 50px;
     border: none;
     transition: all ease-in-out 0.2s;
+}
+
+.width-1OO{
+    width: 100%;
 }
 
 .btn-primary {
@@ -395,6 +436,10 @@ input:focus {
     color: var(--black2);
     background-color: #fafafa;
     cursor: default;
+}
+
+.btn:active{
+    transform: scale(0.90);
 }
 
 .btn:disabled:hover {
@@ -606,6 +651,7 @@ td {
 .contact-form-container {
     width: 100%;
     height: 100%;
+    padding-bottom: 30px;
 }
 
 .top-controls {
@@ -856,6 +902,15 @@ td {
 
 .welcome-container button{
     width: fit-content;
+}
+
+.welcome-modal p{
+    margin-bottom: 5px;
+}
+
+.welcome-modal{
+    z-index: 10;
+    font-size: 0.9rem;
 }
 
 /*Responsivité*/

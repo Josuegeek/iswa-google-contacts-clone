@@ -19,7 +19,7 @@ const chekMenu = document.getElementById("menu-check"),
     serviceInput = document.getElementById("service"),
     emailInput = document.getElementById("email"),
     phoneInput = document.getElementById("phone"),
-    allInputs = document.querySelectorAll(".input-container .input"),
+    allInputs = document.querySelectorAll(".inputs-container input, #label-form input"),
     entrepriseDisplaySwitchBtn = document.getElementById("entreprise-switch-details-inputs"),
     namesDisplaySwitchbtn = document.getElementById("names-switch-details-inputs"),
     allNamesDetailsInputs = document.querySelectorAll(".names-details-inputs"),
@@ -50,6 +50,7 @@ const chekMenu = document.getElementById("menu-check"),
     createNewContactBtn = document.getElementById("btn-create-contact");
 
 initMenuState();
+showIswaModal(2);
 
 //init menu state
 function initMenuState() {
@@ -60,10 +61,10 @@ function initMenuState() {
         menuBarsIcon.classList.add("fa-bars");
         leftNavigation.classList.add("left-navigation-hidden");
         mainFrame.classList.add("main-frame-fill-side");
-        if (contactFormContainer.classList.contains("invisible")) 
+        if (contactFormContainer.classList.contains("invisible"))
             floatBtn.classList.remove("invisible");
     }
-    else{
+    else {
         chekMenu.checked = false;
         menuBarsIcon.classList.remove("fa-bars");
         menuBarsIcon.classList.add("fa-bars-staggered");
@@ -82,7 +83,7 @@ function menuSwitchState() {
         menuBarsIcon.classList.add("fa-bars");
         leftNavigation.classList.add("left-navigation-hidden");
         mainFrame.classList.add("main-frame-fill-side");
-        if (contactFormContainer.classList.contains("invisible")) 
+        if (contactFormContainer.classList.contains("invisible"))
             floatBtn.classList.remove("invisible");
     }
     else {
@@ -330,8 +331,8 @@ function showForm() {
         contactFormContainer.classList.add("show-form-contact");
         contactsContainer.classList.add('invisible');
         floatBtn.classList.add("invisible");
-        welcomeContainer.classList.add("invisible");
         loadAllThings();
+        welcomeContainer.classList.add("invisible");
     }
 }
 
@@ -347,9 +348,12 @@ function hideForm() {
         selectedPhoto = null;
         contactToEdit = null;
         contactFormContainer.reset();
-        submitBtn.textContent = "Enregistrer"
-        submitBtn.disabled = true
-        floatBtn.classList.remove("invisible");
+        submitBtn.textContent = "Enregistrer";
+        submitBtn.disabled = true;
+        if (chekMenu.checked)
+            floatBtn.classList.remove("invisible");
+
+        loadAllThings()
     }
     else {
         if (confirm("Annuler l'opération ?")) {
@@ -363,8 +367,28 @@ function hideForm() {
             contactFormContainer.classList.remove("show-form-contact");
             contactFormContainer.classList.add("hide-form-contact");
             contactsContainer.classList.remove('invisible');
-            floatBtn.classList.remove("invisible");
+            if (chekMenu.checked) floatBtn.classList.remove("invisible");
+            loadAllThings();
         }
     }
 
 }
+
+
+// //les animations des bulles 
+// const animateBulle = document.getElementById('animateBulle');
+
+// function creerBulle() {
+//     for (let i = 0; i < 10; i++) {
+//         const bulle = document.createElement('div');
+//         bulle.classList.add('bulle');
+
+//         bulle.style.top = Math.random() * animateBulle.clientHeight + 'px';
+//         bulle.style.left = Math.random() * animateBulle.clientWidth + 'px';
+
+//         animateBulle.appendChild(bulle);
+//     }
+
+// }
+
+// creerBulle();

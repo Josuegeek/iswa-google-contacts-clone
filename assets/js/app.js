@@ -268,15 +268,24 @@ function createContactControls(contactId) {
         type: "checkbox",
         classList: "check-contact",
         onclick: (event) => {
+            let contact = allContacts.find(c=> c.contactId===contactId);
             const checkbox = event.target;
             const tr = checkbox.parentElement.parentElement.parentElement;
             const rightControls = tr.querySelector(".right-contacts-controls");
             if (checkbox.checked) {
+                
+                if(contact){
+                    selectedContacts.push(contact);
+                }
                 tr.classList.add("selected-row");
                 tr.classList.remove("row-style");
                 rightControls.classList.add("right-contacts-controls-selected");
+
             }
             else {
+                if(contact){
+                    selectedContacts.splice(allContacts.indexOf(contact));
+                }
                 checkbox.parentElement.parentElement.parentElement.classList.remove("selected-row");
                 tr.classList.add("row-style");
                 rightControls.classList.remove("right-contacts-controls-selected");
@@ -443,7 +452,7 @@ function showEditContactForm(contactId) {
 function addNewContact(contact) {
     allContacts.push(contact);
     contactFormContainer.reset();
-    contactImg.style.backgroundImage = `url("../../imgs/user_sample.png")`;
+    contactImg.style.backgroundImage = `url("./imgs/user_sample.png")`;
     submitBtn.disabled = true;
     contactFormContainer.querySelector(".container").scrollTop = 0;
     iswaAlert("Contact enregistré", "", "success");
@@ -536,4 +545,16 @@ function findContacts(attribut, value, word) {
         filteredContacts = allContacts.filter(contact => contact[attribut].includes(value));
     }
     return filteredContacts;
+}
+
+//valider un email
+function isValidEmail(email) {
+    const regex = /^(([^<>()[\]\\.,;:\s@\"]+\.[^<>()[\]\\.,;:\s@\"]{2,})|(([\w+\.-]+)@([a-zA-Z]+\.[a-zA-Z]{2,})))$/;
+    return regex.test(email);
+}
+
+//Valider un téléphone
+function isValidPhone(phone) {
+    const regex = /^[0-9 +]+$/;
+    return regex.test(phone);
 }

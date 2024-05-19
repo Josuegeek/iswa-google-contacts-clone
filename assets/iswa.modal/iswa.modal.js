@@ -59,6 +59,12 @@ function hideModal(id) {
     modal.classList.remove("iswa--modal-container-show");
 }
 
+//hide modal by index
+function hideModalByIndex(index){
+    iswaModalContainers[index-1].classList.remove("iswa--modal-container-show");
+    iswaModalContainers[index-1].classList.add("iswa--modal-container-hide");
+}
+
 //hide all modals
 function hideAllModal(){
     iswaModalContainers.forEach(iswaModalContainer=>{

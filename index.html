@@ -30,6 +30,36 @@
         </div>
     </form>
 
+    <!-----Modal de bienvenu----->
+    <div class="iswa--modal welcome-modal">
+        <div class="column-block default-gap al-it-center">
+            <a class="logo-link row-block al-it-center" href="#">
+                <img class="logo-img" src="./imgs/contats-icon.png" alt="logo image">
+                <span>Contacts</span>
+            </a>
+            <span class="">Bienvenue sur l'application clone de
+                <b>Google Contacts en version lite</b></span>
+            <b>Fonctionnalités remplies :</b>
+            <ul>
+                <li>Crud(créer, modifier et supprimer) sur les contacts et les libellés</li>
+                <li>Ajout de libellé aux contacts(un contact peut avoir plusieurs libellés)</li>
+                <li>Trier les contacts par libellé</li>
+                <li>Rechercher les contacts par un mot</li>
+                <li>Vous pouvez ajouter une photo à un contact et le modifier aussi</li>
+                <li><i class="fa-solid fa-warning social-icon"></i> Pas de base de données pour le moment</li>
+            </ul>
+        </div>
+        <div class="column-block al-it-end">
+            <p><b>Josué ISWA</b></p>
+            <div class="row-block default-gap default-mg-bottom">
+                <a href="https://github.com/Josuegeek" target="_blank"><i class="fa-brands fa-github social-icon"></i></a>
+                <a href="mailto:iswajosuepro@gmail.com"><i class="fa-solid fa-g"></i></a>
+            </div>
+            <div onclick="hideModalByIndex(2)" class="btn btn-primary">Ok</div>
+        </div>
+
+    </div>
+
     <!----modal pour la selection des libellés---->
 
     <!----container principal---->
@@ -41,7 +71,8 @@
                 <i class="fa-solid fa-plus add-icon"></i>
             </button>
             <div class="dropdown-content dropdown-content-t-right">
-                <button id="create-contact-btn" class="row-block default-gap clickable-background default-margin btn btn-secondary3">
+                <button id="create-contact-btn"
+                    class="row-block default-gap clickable-background default-margin btn btn-secondary3">
                     <i class="fa-regular fa-user"></i>
                     <span>Créer un contact</span>
                 </button>
@@ -65,7 +96,7 @@
                 </div>
             </div>
             <div class="right-block just-cont-end">
-                <div class="user-profil-container clickable-background">
+                <div onclick="showIswaModal(2)" class="user-profil-container clickable-background">
                     <i class="fa-solid fa-user"></i>
                 </div>
 
@@ -152,7 +183,8 @@
 
                                 </div>
                                 <div class="dropdown">
-                                    <button id="select-libele-btn" class="btn dropdown-btn small-btn row-block al-it-center default-gap">
+                                    <button id="select-libele-btn"
+                                        class="btn dropdown-btn small-btn row-block al-it-center default-gap">
                                         <i class="fa-solid fa-plus add-icon"></i>
                                         <span>Libellé</span>
                                     </button>
@@ -255,7 +287,7 @@
                                         </div>
 
                                         <div id="add-email-input-btn"
-                                            class="btn btn-action row-block al-it-center  default-gap just-cont-center">
+                                            class="btn btn-action row-block al-it-center  default-gap just-cont-center width-1OO">
                                             <i class="fa-solid fa-plus add-icon"></i>
                                             <span>Ajouter une adresse e-mail</span>
                                         </div>
@@ -302,11 +334,13 @@
                 <!----Page de bienvenue---->
                 <div class="welcome-container column-block default-gap al-it-center">
                     <div class="column-block default-gap al-it-center default-margin">
-                        <img src="./imgs/emptycontacts_animation_cell4.png" alt="image de bienvenue" class="img-welcome">
+                        <img src="./imgs/emptycontacts_animation_cell4.png" alt="image de bienvenue"
+                            class="img-welcome">
                         <span>Pas de contacts pour le moment</span>
                     </div>
 
-                    <button id="create-contact-btn" class="btn btn-secondary3 row-block default-gap just-cont-center al-it-center">
+                    <button id="create-contact-btn"
+                        class="btn btn-secondary3 row-block default-gap just-cont-center al-it-center">
                         <i class="fa-regular fa-user"></i>
                         <span>Créer un nouveau contact</span>
                     </button>
