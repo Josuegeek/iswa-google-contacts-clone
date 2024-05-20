@@ -66,17 +66,17 @@
     <div class="main-container">
 
         <!----Bouton flottant---->
-        <div class="dropdown float-btn-container">
+        <div  id="create-contact-btn" class="float-btn-container">
             <button id="float-btn" class="btn float-btn btn-secondary row-block al-it-center default-gap">
                 <i class="fa-solid fa-plus add-icon"></i>
             </button>
-            <div class="dropdown-content dropdown-content-t-right">
+            <!-- <div class="dropdown-content dropdown-content-t-right">
                 <button id="create-contact-btn"
                     class="row-block default-gap clickable-background default-margin btn btn-secondary3">
                     <i class="fa-regular fa-user"></i>
                     <span>Créer un contact</span>
                 </button>
-            </div>
+            </div> -->
         </div>
 
         <!----le Topbar---->
@@ -113,19 +113,20 @@
                     <span>Contacts</span>
                 </a>
                 <div class="add-contact-btn-container">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary row-block al-it-center default-gap">
-                            <i class="fa-solid fa-plus add-icon"></i>
-                            <span>Créer un contact</span>
-                        </button>
+                    <button id="create-contact-btn" class="btn btn-secondary row-block al-it-center default-gap">
+                        <i class="fa-solid fa-plus add-icon"></i>
+                        <span>Créer un contact</span>
+                    </button>
+                    <!-- <div class="dropdown">
+                        
                         <div class="dropdown-content">
-                            <div id="create-contact-btn"
+                            <div
                                 class="row-block default-gap clickable-background default-margin">
                                 <i class="fa-regular fa-user"></i>
                                 <span>Créer un contact</span>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
                 <div class="column default-mg-top default-gap">

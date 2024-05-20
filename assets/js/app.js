@@ -21,16 +21,16 @@ function loadAllThings() {
 //Charger les lables dans le selecteur des labels dans le formulaire
 function loadLabelsInFrom() {
     labelSelector.innerHTML = "";
-    selectedLabelsContainer.innerHTML="";
+    selectedLabelsContainer.innerHTML = "";
     const labelsList = createLabelsForLabelsSelector();
     const hLabelsList = createContactsLabels(selectedLabels);
-    if(!(selectedLabels.length>0)){
-        selectLabelBtn.innerHTML=`
+    if (!(selectedLabels.length > 0)) {
+        selectLabelBtn.innerHTML = `
         <i class="fa-solid fa-plus add-icon"></i>
         <span>Libellé</span>`;
     }
-    else{
-        selectLabelBtn.innerHTML=`
+    else {
+        selectLabelBtn.innerHTML = `
             <i class="fa-solid fa-pen add-icon"></i>`
     }
     labelSelector.appendChild(labelsList);
@@ -42,11 +42,11 @@ function showContactsNumber() {
     contactsNumbersLbl.forEach(contactsNumber => {
         contactsNumber.textContent = `(${allContacts.length})`;
     });
-    if(allContacts.length<=0){
+    if (allContacts.length <= 0) {
         contacts_table.classList.add("invisible");
         welcomeContainer.classList.remove("invisible");
     }
-    else{
+    else {
         contacts_table.classList.remove("invisible");
         welcomeContainer.classList.add("invisible");
     }
@@ -81,6 +81,7 @@ labelForm.addEventListener("submit", (event) => {
     const label = { name: labelInput.value }
     addLabel(label);
     labelForm.reset();
+    initLabelsStyle();
     hideAllModal();
     loadAllThings();
 });
@@ -123,35 +124,50 @@ contactFormContainer.addEventListener("submit", (event) => {
         const allEmailInputs = emailsContainer.querySelectorAll("input");
         let emailsArray = [];
         allEmailInputs.forEach(emailInput => {
+            console.log(!(emailInput.value != "" && isValidEmail(emailInput.value)))
+            if (!(emailInput.value != "" && isValidEmail(emailInput.value))) {
+                emailInput.style.border="solid 3px red";
+            }
             if (emailInput.value.trim().length > 0) {
                 emailsArray.push(emailInput.value)
             }
         });
 
-        const contact = {
-            contactId: crypto.randomUUID(),
-            nom: nomInput.value, prenom: prenomInput.value, deuxiemePrenom: deuxiemePrenomInput.value,
-            nomPhonetique: nomPhonetiqueInput.value, prenomPhonetique: prenomPhonetiqueInput.value,
-            DeuxiemePrenomPhonetique: deuxiemePrenomPhonetiqueInput.value,
-            prefixe: prefixeInput.value, suffixe: suffixeInput.value, pseudo: pseudoInput.value,
-            enTantQue: enTantQueInput.value,
-            emails: emailsArray,
-            entreprise: entrepriseInput.value, fonction: fonctionInput.value, service: serviceInput.value,
-            phone: phoneInput.value,
-            fonction: fonctionInput.value,
-            labels: selectedLabels,
-            photo: selectedPhoto
-        };
+        if ((allEmailsAreValid(allEmailInputs)) && (isValidPhone(phoneInput.value))) {
+            const contact = {
+                contactId: crypto.randomUUID(),
+                nom: nomInput.value, prenom: prenomInput.value, deuxiemePrenom: deuxiemePrenomInput.value,
+                nomPhonetique: nomPhonetiqueInput.value, prenomPhonetique: prenomPhonetiqueInput.value,
+                DeuxiemePrenomPhonetique: deuxiemePrenomPhonetiqueInput.value,
+                prefixe: prefixeInput.value, suffixe: suffixeInput.value, pseudo: pseudoInput.value,
+                enTantQue: enTantQueInput.value,
+                emails: emailsArray,
+                entreprise: entrepriseInput.value, fonction: fonctionInput.value, service: serviceInput.value,
+                phone: phoneInput.value,
+                fonction: fonctionInput.value,
+                labels: selectedLabels,
+                photo: selectedPhoto
+            };
 
-        if (submitBtn.textContent.toLocaleLowerCase().includes("enregistrer")) {
-            addNewContact(contact);
+            if (submitBtn.textContent.toLocaleLowerCase().includes("enregistrer")) {
+                addNewContact(contact);
+            }
+            else {
+                editContact(contactToEdit, contact);
+            }
         }
         else {
-            editContact(contactToEdit, contact);
+            if (!(isValidPhone(phoneInput.value))) {
+                phoneInput.style.border="solid 3px red";
+            }
+            iswaAlert("Merci de saisir les bonnes valeurs (champs rouges)", "", "error");
         }
     }
     else {
-        iswaAlert("Merci de saisir les bonnes valeurs", "", "error");
+        if(nomInput.value.trim().length <= 0 && nomInput.value!="") nomInput.style.border="solid 3px red";
+        if(prenomInput.value.trim().length <= 0 && prenomInput.value!="") prenomInput.style.border="solid 3px red";
+        if(phoneInput.value.trim().length <= 0 && phoneInput.value!="") phoneInput.style.border="solid 3px red";
+        iswaAlert("Merci de saisir les bonnes valeurs (Les champs rouges)", "", "error");
     }
 });
 
@@ -268,13 +284,13 @@ function createContactControls(contactId) {
         type: "checkbox",
         classList: "check-contact",
         onclick: (event) => {
-            let contact = allContacts.find(c=> c.contactId===contactId);
+            let contact = allContacts.find(c => c.contactId === contactId);
             const checkbox = event.target;
             const tr = checkbox.parentElement.parentElement.parentElement;
             const rightControls = tr.querySelector(".right-contacts-controls");
             if (checkbox.checked) {
-                
-                if(contact){
+
+                if (contact) {
                     selectedContacts.push(contact);
                 }
                 tr.classList.add("selected-row");
@@ -283,7 +299,7 @@ function createContactControls(contactId) {
 
             }
             else {
-                if(contact){
+                if (contact) {
                     selectedContacts.splice(allContacts.indexOf(contact));
                 }
                 checkbox.parentElement.parentElement.parentElement.classList.remove("selected-row");
@@ -452,6 +468,7 @@ function showEditContactForm(contactId) {
 function addNewContact(contact) {
     allContacts.push(contact);
     contactFormContainer.reset();
+    initLabelsStyle();
     contactImg.style.backgroundImage = `url("./imgs/user_sample.png")`;
     submitBtn.disabled = true;
     contactFormContainer.querySelector(".container").scrollTop = 0;
@@ -555,6 +572,16 @@ function isValidEmail(email) {
 
 //Valider un téléphone
 function isValidPhone(phone) {
-    const regex = /^[0-9 +]+$/;
+    const regex = /^\+?[0-9 ]{10,}$/;
     return regex.test(phone);
+}
+
+//verifier si tous les email entrés sont correcte
+function allEmailsAreValid(allEmailInputs){
+    allEmailInputs.forEach(emailInput=>{
+        if(!(isValidEmail(emailInput.value) && emailInput.value != "")){
+            return false;
+        }
+    });
+    return true;
 }

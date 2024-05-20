@@ -168,6 +168,7 @@ function setInputListenners(input) {
         label.classList.add('label-focused');
     });
     input.addEventListener("focusout", (event) => {
+        input.style.border = "solid 1px gray";
         if (input.value === "") {
             let label = input.parentElement.querySelector("label");
             if (label == null) {
@@ -177,6 +178,7 @@ function setInputListenners(input) {
         }
     });
     input.addEventListener("input", (event) => {
+        input.style.border = "solid 1px gray";
         switchBtnStateByInputsValues();
     });
     input.addEventListener("change", (event) => {
@@ -190,6 +192,15 @@ function setInputListenners(input) {
 }
 
 setInputsEventListenner();
+
+//reinitialiser l'état de tous les labels
+function initLabelsStyle(){
+    const labels = document.querySelectorAll("label");
+
+    labels.forEach(label => {
+        label.classList.remove('label-focused');
+    });
+}
 
 //Evitons les erreurs (ce test suffit pour savoir si c'est le formulaire qui est chargé)
 if (namesDisplaySwitchbtn) {
@@ -348,12 +359,14 @@ function hideForm() {
         selectedPhoto = null;
         contactToEdit = null;
         contactFormContainer.reset();
+        initLabelsStyle();
         submitBtn.textContent = "Enregistrer";
         submitBtn.disabled = true;
         if (chekMenu.checked)
             floatBtn.classList.remove("invisible");
 
         loadAllThings()
+        contactImg.style.backgroundImage = `url("./imgs/user_sample.png")`;
     }
     else {
         if (confirm("Annuler l'opération ?")) {
@@ -361,6 +374,7 @@ function hideForm() {
             selectedPhoto = null;
             contactToEdit = null;
             contactFormContainer.reset();
+            initLabelsStyle();
             submitBtn.textContent = "Enregistrer";
             submitBtn.disabled = true;
             contactFormContainer.classList.add("invisible");
@@ -369,13 +383,15 @@ function hideForm() {
             contactsContainer.classList.remove('invisible');
             if (chekMenu.checked) floatBtn.classList.remove("invisible");
             loadAllThings();
+
+            contactImg.style.backgroundImage = `url("./imgs/user_sample.png")`;
         }
     }
 
 }
 
 
-// //les animations des bulles 
+// //les animations des bulles
 // const animateBulle = document.getElementById('animateBulle');
 
 // function creerBulle() {
