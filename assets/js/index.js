@@ -17,7 +17,6 @@ const chekMenu = document.getElementById("menu-check"),
     entrepriseInput = document.getElementById("entreprise"),
     fonctionInput = document.getElementById("fonction"),
     serviceInput = document.getElementById("service"),
-    emailInput = document.getElementById("email"),
     phoneInput = document.getElementById("phone"),
     allInputs = document.querySelectorAll(".inputs-container input, #label-form input"),
     entrepriseDisplaySwitchBtn = document.getElementById("entreprise-switch-details-inputs"),
@@ -111,7 +110,12 @@ window.addEventListener("resize", (event) => {
 //bouton d'affichage du formulaire contact(Formulaire)
 addNewContactbtn.forEach(btn => {
     btn.addEventListener("click", (event) => {
+        const windowWidth = window.innerWidth;
         showForm();
+        if (windowWidth <= 1024) {
+            chekMenu.checked = true;
+            menuSwitchState();
+        }
     });
 })
 
@@ -179,9 +183,11 @@ function setInputListenners(input) {
     });
     input.addEventListener("input", (event) => {
         input.style.border = "solid 1px gray";
+        console.log("input")
         switchBtnStateByInputsValues();
     });
     input.addEventListener("change", (event) => {
+        console.log('change')
         let label = input.parentElement.querySelector("label");
         if (label == null) {
             label = input.parentElement.parentElement.querySelector("label");
@@ -194,7 +200,7 @@ function setInputListenners(input) {
 setInputsEventListenner();
 
 //reinitialiser l'état de tous les labels
-function initLabelsStyle(){
+function initLabelsStyle() {
     const labels = document.querySelectorAll("label");
 
     labels.forEach(label => {
@@ -203,9 +209,16 @@ function initLabelsStyle(){
 }
 
 //reinitialiser le style des inputs
-function initInputsStyle(){
+function initInputsStyle() {
     allInputs.forEach(input => {
+        let label = input.parentElement.querySelector("label");
+        if (label == null) {
+            label = input.parentElement.parentElement.querySelector("label");
+        }
         input.style.border = "solid 1px gray";
+        if (input.value != "") {
+            label.classList.add('label-focused');
+        }
     });
 }
 
@@ -351,6 +364,7 @@ function showForm() {
         floatBtn.classList.add("invisible");
         loadAllThings();
         welcomeContainer.classList.add("invisible");
+        initInputsStyle();
     }
 }
 

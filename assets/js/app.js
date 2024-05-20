@@ -124,7 +124,7 @@ contactFormContainer.addEventListener("submit", (event) => {
 
         let emailsArray = [];
         allEmailInputs.forEach(emailInput => {
-            if (!(emailInput.value != "" && isValidEmail(emailInput.value))) {
+            if ((emailInput.value !== "" && !isValidEmail(emailInput.value))) {
                 emailInput.style.border="solid 3px red";
             }
             if (emailInput.value.trim().length > 0) {
