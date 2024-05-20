@@ -202,6 +202,13 @@ function initLabelsStyle(){
     });
 }
 
+//reinitialiser le style des inputs
+function initInputsStyle(){
+    allInputs.forEach(input => {
+        input.style.border = "solid 1px gray";
+    });
+}
+
 //Evitons les erreurs (ce test suffit pour savoir si c'est le formulaire qui est chargé)
 if (namesDisplaySwitchbtn) {
     //switch des états d'affichage pour les inputs des noms
@@ -360,6 +367,7 @@ function hideForm() {
         contactToEdit = null;
         contactFormContainer.reset();
         initLabelsStyle();
+        initInputsStyle();
         submitBtn.textContent = "Enregistrer";
         submitBtn.disabled = true;
         if (chekMenu.checked)
@@ -375,6 +383,7 @@ function hideForm() {
             contactToEdit = null;
             contactFormContainer.reset();
             initLabelsStyle();
+            initInputsStyle();
             submitBtn.textContent = "Enregistrer";
             submitBtn.disabled = true;
             contactFormContainer.classList.add("invisible");
