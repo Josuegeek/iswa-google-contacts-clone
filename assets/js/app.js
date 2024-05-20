@@ -124,7 +124,6 @@ contactFormContainer.addEventListener("submit", (event) => {
         const allEmailInputs = emailsContainer.querySelectorAll("input");
         let emailsArray = [];
         allEmailInputs.forEach(emailInput => {
-            console.log(!(emailInput.value != "" && isValidEmail(emailInput.value)))
             if (!(emailInput.value != "" && isValidEmail(emailInput.value))) {
                 emailInput.style.border="solid 3px red";
             }
@@ -164,6 +163,12 @@ contactFormContainer.addEventListener("submit", (event) => {
         }
     }
     else {
+        allEmailInputs.forEach(emailInput => {
+            if (!(emailInput.value != "" && isValidEmail(emailInput.value))) {
+                emailInput.style.border="solid 3px red";
+            }
+        });
+        
         if(nomInput.value.trim().length <= 0 && nomInput.value!="") nomInput.style.border="solid 3px red";
         if(prenomInput.value.trim().length <= 0 && prenomInput.value!="") prenomInput.style.border="solid 3px red";
         if(phoneInput.value.trim().length <= 0 && phoneInput.value!="") phoneInput.style.border="solid 3px red";
